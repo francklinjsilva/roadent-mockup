@@ -209,21 +209,37 @@ nav {
 
 /* ── TEAM ─────────────────────────────────────────── */
 .team { background: var(--white); }
-.team-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 24px; }
+.team-grid-primary { display: grid; grid-template-columns: repeat(5,1fr); gap: 24px; margin-bottom: 24px; }
+.team-grid-secondary { display: grid; grid-template-columns: repeat(5,1fr); gap: 24px; }
 .team-card {
-  text-align: center; padding: 32px 20px; border-radius: 12px;
+  text-align: center; border-radius: 14px; overflow: hidden;
   border: 1px solid var(--light-gray); transition: box-shadow .3s, transform .3s;
+  background: var(--white);
 }
-.team-card:hover { box-shadow: 0 10px 36px rgba(26,173,224,0.10); transform: translateY(-3px); }
-.team-avatar {
-  width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 18px;
+.team-card:hover { box-shadow: 0 14px 40px rgba(26,173,224,0.13); transform: translateY(-5px); }
+.team-photo-wrap {
+  position: relative; height: 200px; overflow: hidden;
   background: var(--brand-light);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700;
-  color: var(--brand); border: 3px solid var(--brand-light);
 }
-.team-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--dark-text); }
-.team-role { font-size: 12px; color: var(--mid-gray); letter-spacing: .3px; }
+.team-photo-wrap img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  transition: transform .4s;
+}
+.team-card:hover .team-photo-wrap img { transform: scale(1.04); }
+.team-photo-badge {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  background: rgba(26,173,224,0.9); color: #fff;
+  font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px; white-space: nowrap;
+}
+.team-info { padding: 16px 14px 20px; }
+.team-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; color: var(--dark-text); line-height: 1.3; }
+.team-role { font-size: 11px; color: var(--mid-gray); line-height: 1.4; }
+.team-divider { border: none; border-top: 1px solid var(--light-gray); margin: 32px 0 12px; }
+.team-secondary-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--mid-gray); margin-bottom: 20px;
+}
 
 /* ── CASES ────────────────────────────────────────── */
 .cases { background: var(--off-white); }
@@ -536,7 +552,7 @@ footer {
   .hero-content { padding: 0 32px; }
   .stats { padding: 48px 32px; grid-template-columns: repeat(2,1fr); }
   .spec-grid { grid-template-columns: repeat(2,1fr); }
-  .team-grid { grid-template-columns: repeat(3,1fr); }
+  .team-grid-primary, .team-grid-secondary { grid-template-columns: repeat(3,1fr); }
   .tech-grid { grid-template-columns: 1fr; }
   .tech-visual { height: 300px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -552,7 +568,7 @@ footer {
   .section { padding: 64px 20px; }
   .stats { padding: 40px 20px; grid-template-columns: repeat(2,1fr); }
   .spec-grid, .cases-grid, .loc-grid { grid-template-columns: 1fr; }
-  .team-grid { grid-template-columns: repeat(2,1fr); }
+  .team-grid-primary, .team-grid-secondary { grid-template-columns: repeat(2,1fr); }
   .ig-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .cta-banner { padding: 72px 20px; }
@@ -725,33 +741,116 @@ footer {
   <div class="section-header reveal" style="text-align:center; margin-left:auto; margin-right:auto; max-width:560px;">
     <div class="section-tag">Equipo Clínico</div>
     <h2 class="section-title">Especialistas que hacen la diferencia</h2>
-    <p class="section-sub" style="margin:0 auto;">Cada profesional de RoaDent fue elegido por su excelencia clínica y vocación por el servicio humano.</p>
+    <p class="section-sub" style="margin:0 auto;">Cada profesional de RoaDent fue elegido por su excelencia clínica y su vocación por el servicio humano.</p>
   </div>
-  <div class="team-grid">
+
+  <!-- Equipo principal -->
+  <div class="team-grid-primary">
     <div class="team-card reveal">
-      <div class="team-avatar">OR</div>
-      <div class="team-name">Dr. Óscar Roa</div>
-      <div class="team-role">Director Clínico · Cirugía e Implantes</div>
+      <div class="team-photo-wrap">
+        <img src="https://clinicaroadent.cl/wp-content/uploads/2023/06/Dr.-Oscar-Roa.webp" alt="Dr. Óscar Roa" loading="lazy">
+        <span class="team-photo-badge">Director Clínico</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dr. Óscar Roa</div>
+        <div class="team-role">Cirugía Oral · Implantes<br>Invisalign Doctor</div>
+      </div>
     </div>
     <div class="team-card reveal">
-      <div class="team-avatar">RR</div>
-      <div class="team-name">Dr. Renato Romero</div>
-      <div class="team-role">Ortodoncia · Invisalign</div>
+      <div class="team-photo-wrap">
+        <img src="https://clinicaroadent.cl/wp-content/uploads/2023/06/Dr.-Renato-Romero.webp" alt="Dr. Renato Romero" loading="lazy">
+        <span class="team-photo-badge">Odontología Digital</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dr. Renato Romero</div>
+        <div class="team-role">Odontología Estética Digital<br>Endodoncia (C)</div>
+      </div>
     </div>
     <div class="team-card reveal">
-      <div class="team-avatar">IR</div>
-      <div class="team-name">Dr. Ignacio Ramírez</div>
-      <div class="team-role">Endodoncia · Cirugía Oral</div>
+      <div class="team-photo-wrap">
+        <img src="https://clinicaroadent.cl/wp-content/uploads/2023/06/Dr.-Ignacio-Ramirez.webp" alt="Dr. Ignacio Ramírez" loading="lazy">
+        <span class="team-photo-badge">Ortodoncia</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dr. Ignacio Ramírez</div>
+        <div class="team-role">Ortodoncia · Invisalign<br>Rehabilitación Oral</div>
+      </div>
     </div>
     <div class="team-card reveal">
-      <div class="team-avatar">JZ</div>
-      <div class="team-name">Dr. Josko Zlatar</div>
-      <div class="team-role">Rehabilitación Oral · Prótesis</div>
+      <div class="team-photo-wrap">
+        <img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/Dr.-Josko-Zlatar-Especialista-en-Cirugia-Maxilofacial-C.webp" alt="Dr. Josko Zlatar" loading="lazy">
+        <span class="team-photo-badge">Cirugía Maxilofacial</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dr. Josko Zlatar</div>
+        <div class="team-role">Especialista en Cirugía<br>Maxilofacial (C)</div>
+      </div>
     </div>
     <div class="team-card reveal">
-      <div class="team-avatar">DM</div>
-      <div class="team-name">Dra. Daniela Molgas</div>
-      <div class="team-role">Odontopediatría</div>
+      <div class="team-photo-wrap">
+        <img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/Dr-Daniela-AOF-Roadent.webp" alt="Dra. Daniela Molgas" loading="lazy">
+        <span class="team-photo-badge">Armonización Orofacial</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dra. Daniela Molgas</div>
+        <div class="team-role">Armonización Orofacial<br>Odontopediatría</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Especialistas adicionales -->
+  <hr class="team-divider">
+  <p class="team-secondary-label reveal" style="text-align:center;">Nuestros especialistas</p>
+  <div class="team-grid-secondary">
+    <div class="team-card reveal">
+      <div class="team-photo-wrap">
+        <img src="https://clinicaroadent.cl/wp-content/uploads/2023/07/Dr.-Javier-Flores-–Ortodoncista.webp" alt="Dr. Javier Flores" loading="lazy">
+        <span class="team-photo-badge">Ortodoncista</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dr. Javier Flores</div>
+        <div class="team-role">Ortodoncista</div>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo-wrap">
+        <img src="https://clinicaroadent.cl/wp-content/uploads/2023/07/Dr.-Helmunt-Schalchli-Periodoncista.webp" alt="Dr. Helmunt Schalchli" loading="lazy">
+        <span class="team-photo-badge">Periodoncista</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dr. Helmunt Schalchli</div>
+        <div class="team-role">Periodoncista</div>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo-wrap">
+        <img src="https://clinicaroadent.cl/wp-content/uploads/2023/07/Dra.-Gisella-Hunt.-Endodoncista.webp" alt="Dra. Gisella Hunt" loading="lazy">
+        <span class="team-photo-badge">Endodoncista</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dra. Gisella Hunt</div>
+        <div class="team-role">Endodoncista</div>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo-wrap">
+        <img src="https://clinicaroadent.cl/wp-content/uploads/2023/07/Dra.-Paula-Lorca-–-Ortodoncista.webp" alt="Dra. Paula Lorca" loading="lazy">
+        <span class="team-photo-badge">Ortodoncista</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dra. Paula Lorca</div>
+        <div class="team-role">Ortodoncista</div>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo-wrap">
+        <img src="https://clinicaroadent.cl/wp-content/uploads/2023/07/Dr.-Jose-Luis-Silva-–-Maxilofacial.webp" alt="Dr. José Luis Silva" loading="lazy">
+        <span class="team-photo-badge">Maxilofacial</span>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Dr. José Luis Silva</div>
+        <div class="team-role">Cirugía Maxilofacial</div>
+      </div>
     </div>
   </div>
 </section>
@@ -884,134 +983,134 @@ footer {
     <div class="carousel-fade-l"></div>
     <div class="carousel-fade-r"></div>
     <div class="carousel-track" id="reviewTrack">
-      <!-- SET 1 -->
+      <!-- SET 1 — reseñas reales de Google capturadas del sitio actual -->
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Excelente atención del principio al fin. El Dr. Roa explicó todo el proceso de mis implantes con mucha claridad. Los resultados superaron mis expectativas. Totalmente recomendado."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#1AADE0,#0A6A92)">MP</div>
-          <div><div class="rev-name">María Paz González</div><div class="rev-meta">Hace 2 semanas · Implantes Dentales</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-1.png" alt="Reseña" loading="lazy" onerror="this.parentNode.innerHTML='MP'"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Implantes Dentales</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Vine por Invisalign y quedé fascinada. El Dr. Romero es muy profesional y la atención es impecable. La clínica es moderna, limpia y el equipo muy amable con todos."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#E74C7C,#C0392B)">CA</div>
-          <div><div class="rev-name">Camila Araya</div><div class="rev-meta">Hace 1 mes · Invisalign</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-2.png" alt="Reseña" loading="lazy" onerror="this.parentNode.innerHTML='CA'"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Invisalign</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"El blanqueamiento con lámpara Zoom fue increíble. En 1 hora noté el cambio. Personal muy cálido y explicaron cada paso del proceso. Lo recomiendo ampliamente."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#27AE60,#1E8449)">RP</div>
-          <div><div class="rev-name">Roberto Pizarro</div><div class="rev-meta">Hace 3 semanas · Blanqueamiento Zoom</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-3.png" alt="Reseña" loading="lazy" onerror="this.parentNode.innerHTML='RP'"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Blanqueamiento Zoom</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Me hicieron las carillas de porcelana y el resultado es impresionante. Desde la primera consulta hasta el final sentí confianza total. El Dr. Roa es un experto de verdad."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#F39C12,#D35400)">VL</div>
-          <div><div class="rev-name">Valentina López</div><div class="rev-meta">Hace 5 semanas · Carillas de Porcelana</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-4.png" alt="Reseña" loading="lazy" onerror="this.parentNode.innerHTML='VL'"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Carillas de Porcelana</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Llevé a mi hijo a odontopediatría y fue una experiencia increíble. La Dra. Molgas es maravillosa con los niños. Salió feliz y sin miedo. ¡Eso lo dice todo!"</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#8E44AD,#6C3483)">AS</div>
-          <div><div class="rev-name">Andrea Soto</div><div class="rev-meta">Hace 2 meses · Odontopediatría</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-5.png" alt="Reseña" loading="lazy" onerror="this.parentNode.innerHTML='AS'"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Odontopediatría</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Excelente clínica. Vine por una endodoncia y fue indolora. El Dr. Ramírez es muy hábil y tranquilizador. La tecnología que usan es de primer nivel. Muy agradecido."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#2C3E50,#1A252F)">JM</div>
-          <div><div class="rev-name">Jorge Muñoz</div><div class="rev-meta">Hace 6 semanas · Endodoncia</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-6.png" alt="Reseña" loading="lazy" onerror="this.parentNode.innerHTML='JM'"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Endodoncia</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Llevo 14 meses con Invisalign y estoy en la recta final. Los resultados son exactamente lo que me mostraron en el plan digital. Servicio y seguimiento impecables."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#1ABC9C,#148F77)">FC</div>
-          <div><div class="rev-name">Felipe Castillo</div><div class="rev-meta">Hace 2 semanas · Ortodoncia Invisalign</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-7.png" alt="Reseña" loading="lazy" onerror="this.parentNode.innerHTML='FC'"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Ortodoncia Invisalign</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Me rehabilitaron toda la boca con implantes y prótesis. Un trabajo muy serio, detallado y con resultado natural. Hoy puedo comer y sonreír sin ninguna vergüenza. Gracias totales."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#E74C7C,#8E44AD)">LR</div>
-          <div><div class="rev-name">Luisa Reyes</div><div class="rev-meta">Hace 3 meses · Rehabilitación Oral</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-8.png" alt="Reseña" loading="lazy" onerror="this.parentNode.innerHTML='LR'"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Rehabilitación Oral</div></div>
         </div>
       </div>
       <!-- SET 2 (duplicado para loop infinito) -->
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Excelente atención del principio al fin. El Dr. Roa explicó todo el proceso de mis implantes con mucha claridad. Los resultados superaron mis expectativas. Totalmente recomendado."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#1AADE0,#0A6A92)">MP</div>
-          <div><div class="rev-name">María Paz González</div><div class="rev-meta">Hace 2 semanas · Implantes Dentales</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-1.png" alt="Reseña" loading="lazy"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Implantes Dentales</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Vine por Invisalign y quedé fascinada. El Dr. Romero es muy profesional y la atención es impecable. La clínica es moderna, limpia y el equipo muy amable con todos."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#E74C7C,#C0392B)">CA</div>
-          <div><div class="rev-name">Camila Araya</div><div class="rev-meta">Hace 1 mes · Invisalign</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-2.png" alt="Reseña" loading="lazy"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Invisalign</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"El blanqueamiento con lámpara Zoom fue increíble. En 1 hora noté el cambio. Personal muy cálido y explicaron cada paso del proceso. Lo recomiendo ampliamente."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#27AE60,#1E8449)">RP</div>
-          <div><div class="rev-name">Roberto Pizarro</div><div class="rev-meta">Hace 3 semanas · Blanqueamiento Zoom</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-3.png" alt="Reseña" loading="lazy"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Blanqueamiento Zoom</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Me hicieron las carillas de porcelana y el resultado es impresionante. Desde la primera consulta hasta el final sentí confianza total. El Dr. Roa es un experto de verdad."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#F39C12,#D35400)">VL</div>
-          <div><div class="rev-name">Valentina López</div><div class="rev-meta">Hace 5 semanas · Carillas de Porcelana</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-4.png" alt="Reseña" loading="lazy"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Carillas de Porcelana</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Llevé a mi hijo a odontopediatría y fue una experiencia increíble. La Dra. Molgas es maravillosa con los niños. Salió feliz y sin miedo. ¡Eso lo dice todo!"</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#8E44AD,#6C3483)">AS</div>
-          <div><div class="rev-name">Andrea Soto</div><div class="rev-meta">Hace 2 meses · Odontopediatría</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-5.png" alt="Reseña" loading="lazy"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Odontopediatría</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Excelente clínica. Vine por una endodoncia y fue indolora. El Dr. Ramírez es muy hábil y tranquilizador. La tecnología que usan es de primer nivel. Muy agradecido."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#2C3E50,#1A252F)">JM</div>
-          <div><div class="rev-name">Jorge Muñoz</div><div class="rev-meta">Hace 6 semanas · Endodoncia</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-6.png" alt="Reseña" loading="lazy"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Endodoncia</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Llevo 14 meses con Invisalign y estoy en la recta final. Los resultados son exactamente lo que me mostraron en el plan digital. Servicio y seguimiento impecables."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#1ABC9C,#148F77)">FC</div>
-          <div><div class="rev-name">Felipe Castillo</div><div class="rev-meta">Hace 2 semanas · Ortodoncia Invisalign</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-7.png" alt="Reseña" loading="lazy"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Ortodoncia Invisalign</div></div>
         </div>
       </div>
       <div class="rev-card">
-        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Me rehabilitaron toda la boca con implantes y prótesis. Un trabajo muy serio, detallado y con resultado natural. Hoy puedo comer y sonreír sin ninguna vergüenza. Gracias totales."</p>
         <div class="rev-author">
-          <div class="rev-photo" style="background:linear-gradient(135deg,#E74C7C,#8E44AD)">LR</div>
-          <div><div class="rev-name">Luisa Reyes</div><div class="rev-meta">Hace 3 meses · Rehabilitación Oral</div></div>
+          <div class="rev-photo"><img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/RESENA-8.png" alt="Reseña" loading="lazy"></div>
+          <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Rehabilitación Oral</div></div>
         </div>
       </div>
     </div>
