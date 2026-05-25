@@ -247,27 +247,80 @@ nav {
 .cases { background: var(--off-white); }
 .cases-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
 .case-card {
-  background: var(--white); border-radius: 12px; overflow: hidden;
-  border: 1px solid var(--light-gray); transition: box-shadow .3s;
+  background: var(--white); border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--light-gray); transition: box-shadow .3s, transform .3s;
 }
-.case-card:hover { box-shadow: 0 12px 40px rgba(26,173,224,0.10); }
-.case-images {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 3px; height: 220px;
+.case-card:hover { box-shadow: 0 14px 44px rgba(26,173,224,0.13); transform: translateY(-4px); }
+
+/* Before/After split */
+.case-ba {
+  position: relative; height: 260px; overflow: hidden; cursor: pointer;
 }
-.case-img {
-  background: var(--brand-light);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 32px;
+.case-img-before, .case-img-after {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
 }
-.case-img.after { background: linear-gradient(135deg, #E6F7FD 0%, #C0ECF9 100%); }
-.case-info { padding: 24px; }
+.case-img-before {
+  filter: grayscale(100%) brightness(0.78) contrast(1.05);
+}
+.case-img-after {
+  clip-path: inset(0 0 0 50%);
+  transition: clip-path .4s ease;
+}
+.case-card:hover .case-img-after { clip-path: inset(0 0 0 35%); }
+.case-ba-divider {
+  position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 2px; background: rgba(255,255,255,0.9); transform: translateX(-50%); z-index: 3;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  transition: left .4s ease;
+}
+.case-card:hover .case-ba-divider { left: 35%; }
+.ba-label {
+  position: absolute; bottom: 12px; font-size: 9px; font-weight: 800;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 20px; z-index: 4; pointer-events: none;
+}
+.ba-label.antes {
+  left: 12px; background: rgba(0,0,0,0.65); color: rgba(255,255,255,0.85);
+}
+.ba-label.despues {
+  right: 12px; background: var(--brand); color: #fff;
+}
+
+.case-info { padding: 20px 22px 24px; }
 .case-tag {
-  font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
   color: var(--brand); margin-bottom: 8px;
 }
-.case-info h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-.case-info p { font-size: 13px; color: var(--body-text); line-height: 1.5; }
+.case-info h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--dark-text); }
+.case-info p { font-size: 13px; color: var(--body-text); line-height: 1.55; }
+
+/* ── GOOGLE REVIEWS BADGE ─────────────────────────── */
+.google-reviews-logo {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.google-reviews-wordmark {
+  font-size: 26px; font-weight: 700; letter-spacing: -0.5px; line-height: 1;
+  font-family: 'Product Sans', Arial, sans-serif;
+}
+.google-reviews-wordmark .g1 { color: #4285F4; }
+.google-reviews-wordmark .g2 { color: #EA4335; }
+.google-reviews-wordmark .g3 { color: #FBBC04; }
+.google-reviews-wordmark .g4 { color: #4285F4; }
+.google-reviews-wordmark .g5 { color: #34A853; }
+.google-reviews-wordmark .g6 { color: #EA4335; }
+.google-reviews-sub {
+  display: flex; align-items: center; gap: 6px;
+}
+.google-reviews-sub span:first-child {
+  font-size: 14px; color: #5F6368; font-weight: 500;
+}
+.google-reviews-stars-row { color: #FBBC04; font-size: 16px; letter-spacing: 1px; }
+.google-score-num {
+  font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700;
+  color: var(--dark-text); line-height: 1;
+}
+.google-score-detail { font-size: 12px; color: var(--mid-gray); margin-top: 3px; }
 
 /* ── REVIEWS ──────────────────────────────────────── */
 .reviews { background: var(--white); }
@@ -933,9 +986,16 @@ footer {
   </div>
   <div class="cases-grid">
     <div class="case-card reveal">
-      <div class="case-images">
-        <div class="case-img">😐</div>
-        <div class="case-img after">😁</div>
+      <div class="case-ba">
+        <img class="case-img-before"
+          src="https://clinicaroadent.cl/wp-content/uploads/2023/07/CORONAS-Y-CARILLAS-CERAMICAS-EN-UNA-SOLA-SESION.webp"
+          alt="Antes — Carillas de Porcelana" loading="lazy">
+        <img class="case-img-after"
+          src="https://clinicaroadent.cl/wp-content/uploads/2023/07/CORONAS-Y-CARILLAS-CERAMICAS-EN-UNA-SOLA-SESION.webp"
+          alt="Después — Carillas de Porcelana" loading="lazy">
+        <div class="case-ba-divider"></div>
+        <span class="ba-label antes">ANTES</span>
+        <span class="ba-label despues">DESPUÉS</span>
       </div>
       <div class="case-info">
         <div class="case-tag">Carillas de Porcelana</div>
@@ -944,9 +1004,16 @@ footer {
       </div>
     </div>
     <div class="case-card reveal">
-      <div class="case-images">
-        <div class="case-img">😬</div>
-        <div class="case-img after">🤩</div>
+      <div class="case-ba">
+        <img class="case-img-before"
+          src="https://clinicaroadent.cl/wp-content/uploads/2023/07/ROADENT-THNX-INVISALIGN.webp"
+          alt="Antes — Invisalign" loading="lazy">
+        <img class="case-img-after"
+          src="https://clinicaroadent.cl/wp-content/uploads/2023/07/ROADENT-THNX-INVISALIGN.webp"
+          alt="Después — Invisalign" loading="lazy">
+        <div class="case-ba-divider"></div>
+        <span class="ba-label antes">ANTES</span>
+        <span class="ba-label despues">DESPUÉS</span>
       </div>
       <div class="case-info">
         <div class="case-tag">Invisalign</div>
@@ -955,9 +1022,16 @@ footer {
       </div>
     </div>
     <div class="case-card reveal">
-      <div class="case-images">
-        <div class="case-img">🙁</div>
-        <div class="case-img after">😊</div>
+      <div class="case-ba">
+        <img class="case-img-before"
+          src="https://clinicaroadent.cl/wp-content/uploads/2023/07/IMPLANTES-DENTALES.webp"
+          alt="Antes — Implantes Dentales" loading="lazy">
+        <img class="case-img-after"
+          src="https://clinicaroadent.cl/wp-content/uploads/2023/07/IMPLANTES-DENTALES.webp"
+          alt="Después — Implantes Dentales" loading="lazy">
+        <div class="case-ba-divider"></div>
+        <span class="ba-label antes">ANTES</span>
+        <span class="ba-label despues">DESPUÉS</span>
       </div>
       <div class="case-info">
         <div class="case-tag">Implantes Dentales</div>
@@ -1031,15 +1105,22 @@ footer {
       <div class="section-tag">Reseñas Google</div>
       <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
     </div>
-    <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
-      <div class="google-rating-block">
-        <div class="google-icon">G</div>
-        <div>
-          <div class="google-score">4.9</div>
-          <div class="google-stars-row">
-            <span>★★★★★</span>
-            <small>+180 reseñas</small>
+    <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
+      <!-- Google Reviews logo -->
+      <div style="display:flex; align-items:center; gap:18px;">
+        <div class="google-reviews-logo">
+          <div class="google-reviews-wordmark">
+            <span class="g1">G</span><span class="g2">o</span><span class="g3">o</span><span class="g4">g</span><span class="g5">l</span><span class="g6">e</span>
           </div>
+          <div class="google-reviews-sub">
+            <span>Reviews</span>
+            <span class="google-reviews-stars-row">★★★★★</span>
+          </div>
+        </div>
+        <div style="width:1px; height:48px; background:var(--light-gray);"></div>
+        <div>
+          <div class="google-score-num">4.9</div>
+          <div class="google-score-detail">+180 reseñas verificadas</div>
         </div>
       </div>
       <a href="https://share.google/wHvOjOdgdzYMOfCsJ" target="_blank" class="btn-review">
