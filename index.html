@@ -659,6 +659,46 @@ footer {
 .form-success h4 { font-size: 18px; font-weight: 700; color: var(--brand-deep); margin-bottom: 8px; }
 .form-success p { font-size: 14px; color: var(--body-text); }
 
+/* ── CUSTOM CURSOR ────────────────────────────────── */
+* { cursor: none !important; }
+#cursor-aura {
+  position: fixed; width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(26,173,224,0.18); border: 1.5px solid rgba(26,173,224,0.55);
+  pointer-events: none; z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width .25s ease, height .25s ease, background .25s ease, border-color .25s ease, opacity .2s;
+  will-change: transform;
+}
+#cursor-tooth {
+  position: fixed; width: 20px; height: 20px;
+  pointer-events: none; z-index: 100000;
+  transform: translate(-50%, -50%);
+  transition: transform .08s ease, opacity .2s;
+  will-change: transform;
+}
+#cursor-tooth svg { width: 100%; height: 100%; }
+body.cursor-hover #cursor-aura {
+  width: 58px; height: 58px;
+  background: rgba(26,173,224,0.10);
+  border-color: rgba(26,173,224,0.8);
+}
+body.cursor-click #cursor-aura {
+  width: 28px; height: 28px;
+  background: rgba(26,173,224,0.35);
+}
+
+/* ── TILT 3D CARDS ────────────────────────────────── */
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt-card .tilt-glow {
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(circle at 50% 50%, rgba(26,173,224,0.18) 0%, transparent 70%);
+  opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 1;
+}
+.tilt-card:hover .tilt-glow { opacity: 1; }
+
 /* ── REVEAL ANIMATIONS ────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -774,37 +814,43 @@ footer {
     <p class="section-sub">Desde ortodoncia avanzada hasta rehabilitación oral completa, contamos con especialistas en cada área para entregar el mejor resultado.</p>
   </div>
   <div class="spec-grid">
-    <div class="spec-card reveal">
+    <div class="spec-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="spec-icon">😁</div>
       <h3>Ortodoncia con Invisalign</h3>
       <p>Alineadores transparentes de última generación. Mueve tus dientes sin brackets visibles, con tecnología 100% digital.</p>
       <a href="/invisalign-copiapo/" class="spec-link">Conocer más →</a>
     </div>
-    <div class="spec-card reveal">
+    <div class="spec-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="spec-icon">🦷</div>
       <h3>Implantes Dentales</h3>
       <p>Reemplaza dientes perdidos con implantes de titanio que se integran naturalmente al hueso, devolviendo función y estética.</p>
       <a href="/implantes-dentales/" class="spec-link">Conocer más →</a>
     </div>
-    <div class="spec-card reveal">
+    <div class="spec-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="spec-icon">✨</div>
       <h3>Blanqueamiento Zoom Philips</h3>
       <p>El sistema de blanqueamiento con lámpara más reconocido del mundo. Hasta 8 tonos más claro en una sola sesión.</p>
       <a href="/blanqueamiento-dental-con-lampara-zoom-philips/" class="spec-link">Conocer más →</a>
     </div>
-    <div class="spec-card reveal">
+    <div class="spec-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="spec-icon">🔬</div>
       <h3>Endodoncia</h3>
       <p>Tratamiento de conducto con técnicas modernas y mínimamente invasivas. Salvamos tu diente natural sin dolor.</p>
       <a href="/endodoncia/" class="spec-link">Conocer más →</a>
     </div>
-    <div class="spec-card reveal">
+    <div class="spec-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="spec-icon">💎</div>
       <h3>Carillas de Porcelana</h3>
       <p>Diseño de sonrisa premium con laminados de cerámica ultrafina. El cambio más estético y duradero para tu sonrisa.</p>
       <a href="#" class="spec-link">Conocer más →</a>
     </div>
-    <div class="spec-card reveal">
+    <div class="spec-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="spec-icon">🧒</div>
       <h3>Odontopediatría</h3>
       <p>Atención especializada para niños en un ambiente cálido y sin miedo. Formamos hábitos saludables desde la primera visita.</p>
@@ -868,7 +914,8 @@ footer {
 
   <!-- Equipo principal -->
   <div class="team-grid-primary">
-    <div class="team-card reveal">
+    <div class="team-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="team-photo-wrap">
         <img src="https://clinicaroadent.cl/wp-content/uploads/2023/06/Dr.-Oscar-Roa.webp" alt="Dr. Óscar Roa" loading="lazy">
         <span class="team-photo-badge">Director Clínico</span>
@@ -878,7 +925,8 @@ footer {
         <div class="team-role">Cirugía Oral · Implantes<br>Invisalign Doctor</div>
       </div>
     </div>
-    <div class="team-card reveal">
+    <div class="team-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="team-photo-wrap">
         <img src="https://clinicaroadent.cl/wp-content/uploads/2023/06/Dr.-Renato-Romero.webp" alt="Dr. Renato Romero" loading="lazy">
         <span class="team-photo-badge">Odontología Digital</span>
@@ -888,7 +936,8 @@ footer {
         <div class="team-role">Odontología Estética Digital<br>Endodoncia (C)</div>
       </div>
     </div>
-    <div class="team-card reveal">
+    <div class="team-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="team-photo-wrap">
         <img src="https://clinicaroadent.cl/wp-content/uploads/2023/06/Dr.-Ignacio-Ramirez.webp" alt="Dr. Ignacio Ramírez" loading="lazy">
         <span class="team-photo-badge">Ortodoncia</span>
@@ -898,7 +947,8 @@ footer {
         <div class="team-role">Ortodoncia · Invisalign<br>Rehabilitación Oral</div>
       </div>
     </div>
-    <div class="team-card reveal">
+    <div class="team-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="team-photo-wrap">
         <img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/Dr.-Josko-Zlatar-Especialista-en-Cirugia-Maxilofacial-C.webp" alt="Dr. Josko Zlatar" loading="lazy">
         <span class="team-photo-badge">Cirugía Maxilofacial</span>
@@ -908,7 +958,8 @@ footer {
         <div class="team-role">Especialista en Cirugía<br>Maxilofacial (C)</div>
       </div>
     </div>
-    <div class="team-card reveal">
+    <div class="team-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="team-photo-wrap">
         <img src="https://clinicaroadent.cl/wp-content/uploads/2023/10/Dr-Daniela-AOF-Roadent.webp" alt="Dra. Daniela Molgas" loading="lazy">
         <span class="team-photo-badge">Armonización Orofacial</span>
@@ -924,7 +975,8 @@ footer {
   <hr class="team-divider">
   <p class="team-secondary-label reveal" style="text-align:center;">Nuestros especialistas</p>
   <div class="team-grid-secondary">
-    <div class="team-card reveal">
+    <div class="team-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="team-photo-wrap">
         <img src="https://clinicaroadent.cl/wp-content/uploads/2023/07/Dr.-Javier-Flores-–Ortodoncista.webp" alt="Dr. Javier Flores" loading="lazy">
         <span class="team-photo-badge">Ortodoncista</span>
@@ -934,7 +986,8 @@ footer {
         <div class="team-role">Ortodoncista</div>
       </div>
     </div>
-    <div class="team-card reveal">
+    <div class="team-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="team-photo-wrap">
         <img src="https://clinicaroadent.cl/wp-content/uploads/2023/07/Dr.-Helmunt-Schalchli-Periodoncista.webp" alt="Dr. Helmunt Schalchli" loading="lazy">
         <span class="team-photo-badge">Periodoncista</span>
@@ -944,7 +997,8 @@ footer {
         <div class="team-role">Periodoncista</div>
       </div>
     </div>
-    <div class="team-card reveal">
+    <div class="team-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="team-photo-wrap">
         <img src="https://clinicaroadent.cl/wp-content/uploads/2023/07/Dra.-Gisella-Hunt.-Endodoncista.webp" alt="Dra. Gisella Hunt" loading="lazy">
         <span class="team-photo-badge">Endodoncista</span>
@@ -954,7 +1008,8 @@ footer {
         <div class="team-role">Endodoncista</div>
       </div>
     </div>
-    <div class="team-card reveal">
+    <div class="team-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="team-photo-wrap">
         <img src="https://clinicaroadent.cl/wp-content/uploads/2023/07/Dra.-Paula-Lorca-–-Ortodoncista.webp" alt="Dra. Paula Lorca" loading="lazy">
         <span class="team-photo-badge">Ortodoncista</span>
@@ -964,7 +1019,8 @@ footer {
         <div class="team-role">Ortodoncista</div>
       </div>
     </div>
-    <div class="team-card reveal">
+    <div class="team-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="team-photo-wrap">
         <img src="https://clinicaroadent.cl/wp-content/uploads/2023/07/Dr.-Jose-Luis-Silva-–-Maxilofacial.webp" alt="Dr. José Luis Silva" loading="lazy">
         <span class="team-photo-badge">Maxilofacial</span>
@@ -985,7 +1041,8 @@ footer {
     <p class="section-sub">Cada sonrisa tiene una historia. Estos son algunos de los casos que nos llenan de orgullo.</p>
   </div>
   <div class="cases-grid">
-    <div class="case-card reveal">
+    <div class="case-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="case-ba">
         <img class="case-img-before"
           src="https://clinicaroadent.cl/wp-content/uploads/2023/07/CORONAS-Y-CARILLAS-CERAMICAS-EN-UNA-SOLA-SESION.webp"
@@ -1003,7 +1060,8 @@ footer {
         <p>10 carillas de porcelana. Transformación estética total en 2 sesiones.</p>
       </div>
     </div>
-    <div class="case-card reveal">
+    <div class="case-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="case-ba">
         <img class="case-img-before"
           src="https://clinicaroadent.cl/wp-content/uploads/2023/07/ROADENT-THNX-INVISALIGN.webp"
@@ -1021,7 +1079,8 @@ footer {
         <p>18 meses de tratamiento. Resultado natural y sonrisa alineada sin brackets.</p>
       </div>
     </div>
-    <div class="case-card reveal">
+    <div class="case-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="case-ba">
         <img class="case-img-before"
           src="https://clinicaroadent.cl/wp-content/uploads/2023/07/IMPLANTES-DENTALES.webp"
@@ -1134,7 +1193,8 @@ footer {
     <div class="carousel-fade-r"></div>
     <div class="carousel-track" id="reviewTrack">
       <!-- SET 1 — reseñas reales de Google capturadas del sitio actual -->
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Excelente atención del principio al fin. El Dr. Roa explicó todo el proceso de mis implantes con mucha claridad. Los resultados superaron mis expectativas. Totalmente recomendado."</p>
         <div class="rev-author">
@@ -1142,7 +1202,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Implantes Dentales</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Vine por Invisalign y quedé fascinada. El Dr. Romero es muy profesional y la atención es impecable. La clínica es moderna, limpia y el equipo muy amable con todos."</p>
         <div class="rev-author">
@@ -1150,7 +1211,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Invisalign</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"El blanqueamiento con lámpara Zoom fue increíble. En 1 hora noté el cambio. Personal muy cálido y explicaron cada paso del proceso. Lo recomiendo ampliamente."</p>
         <div class="rev-author">
@@ -1158,7 +1220,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Blanqueamiento Zoom</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Me hicieron las carillas de porcelana y el resultado es impresionante. Desde la primera consulta hasta el final sentí confianza total. El Dr. Roa es un experto de verdad."</p>
         <div class="rev-author">
@@ -1166,7 +1229,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Carillas de Porcelana</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Llevé a mi hijo a odontopediatría y fue una experiencia increíble. La Dra. Molgas es maravillosa con los niños. Salió feliz y sin miedo. ¡Eso lo dice todo!"</p>
         <div class="rev-author">
@@ -1174,7 +1238,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Odontopediatría</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Excelente clínica. Vine por una endodoncia y fue indolora. El Dr. Ramírez es muy hábil y tranquilizador. La tecnología que usan es de primer nivel. Muy agradecido."</p>
         <div class="rev-author">
@@ -1182,7 +1247,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Endodoncia</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Llevo 14 meses con Invisalign y estoy en la recta final. Los resultados son exactamente lo que me mostraron en el plan digital. Servicio y seguimiento impecables."</p>
         <div class="rev-author">
@@ -1190,7 +1256,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Ortodoncia Invisalign</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Me rehabilitaron toda la boca con implantes y prótesis. Un trabajo muy serio, detallado y con resultado natural. Hoy puedo comer y sonreír sin ninguna vergüenza. Gracias totales."</p>
         <div class="rev-author">
@@ -1199,7 +1266,8 @@ footer {
         </div>
       </div>
       <!-- SET 2 (duplicado para loop infinito) -->
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Excelente atención del principio al fin. El Dr. Roa explicó todo el proceso de mis implantes con mucha claridad. Los resultados superaron mis expectativas. Totalmente recomendado."</p>
         <div class="rev-author">
@@ -1207,7 +1275,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Implantes Dentales</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Vine por Invisalign y quedé fascinada. El Dr. Romero es muy profesional y la atención es impecable. La clínica es moderna, limpia y el equipo muy amable con todos."</p>
         <div class="rev-author">
@@ -1215,7 +1284,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Invisalign</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"El blanqueamiento con lámpara Zoom fue increíble. En 1 hora noté el cambio. Personal muy cálido y explicaron cada paso del proceso. Lo recomiendo ampliamente."</p>
         <div class="rev-author">
@@ -1223,7 +1293,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Blanqueamiento Zoom</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Me hicieron las carillas de porcelana y el resultado es impresionante. Desde la primera consulta hasta el final sentí confianza total. El Dr. Roa es un experto de verdad."</p>
         <div class="rev-author">
@@ -1231,7 +1302,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Carillas de Porcelana</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Llevé a mi hijo a odontopediatría y fue una experiencia increíble. La Dra. Molgas es maravillosa con los niños. Salió feliz y sin miedo. ¡Eso lo dice todo!"</p>
         <div class="rev-author">
@@ -1239,7 +1311,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Odontopediatría</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Excelente clínica. Vine por una endodoncia y fue indolora. El Dr. Ramírez es muy hábil y tranquilizador. La tecnología que usan es de primer nivel. Muy agradecido."</p>
         <div class="rev-author">
@@ -1247,7 +1320,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Endodoncia</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Llevo 14 meses con Invisalign y estoy en la recta final. Los resultados son exactamente lo que me mostraron en el plan digital. Servicio y seguimiento impecables."</p>
         <div class="rev-author">
@@ -1255,7 +1329,8 @@ footer {
           <div><div class="rev-name">Reseña verificada</div><div class="rev-meta">★★★★★ Google · Ortodoncia Invisalign</div></div>
         </div>
       </div>
-      <div class="rev-card">
+      <div class="rev-card tilt-card">
+        <div class="tilt-glow"></div>
         <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">G</span></div>
         <p class="rev-text">"Me rehabilitaron toda la boca con implantes y prótesis. Un trabajo muy serio, detallado y con resultado natural. Hoy puedo comer y sonreír sin ninguna vergüenza. Gracias totales."</p>
         <div class="rev-author">
@@ -1322,7 +1397,8 @@ footer {
     <p class="section-sub" style="margin:0 auto;">Dos sedes equipadas con la misma tecnología y calidad de atención, para que elijas la más conveniente para ti.</p>
   </div>
   <div class="loc-grid">
-    <div class="loc-card reveal">
+    <div class="loc-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="loc-map">📍</div>
       <div class="loc-info">
         <span class="loc-badge">Sede 1 — Principal</span>
@@ -1345,7 +1421,8 @@ footer {
         </div>
       </div>
     </div>
-    <div class="loc-card reveal">
+    <div class="loc-card reveal tilt-card">
+      <div class="tilt-glow"></div>
       <div class="loc-map">📍</div>
       <div class="loc-info">
         <span class="loc-badge">Sede 2</span>
@@ -1653,6 +1730,86 @@ function handleBooking(e) {
       });
     }, { threshold: 0.3 }).observe(processSection);
   }
+})();
+</script>
+
+<!-- ── CUSTOM CURSOR ────────────────────────────────── -->
+<div id="cursor-aura"></div>
+<div id="cursor-tooth">
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 3C13 3 10.5 4.8 9 6.8c-1 1.4-1.5 3-1.5 4.7 0 1.8.4 3.6 1 5.3l2.1 6.7c.4 1.3 1.3 2 2.4 2s2-.7 2.3-2l.7-2.5h.1l.7 2.5c.4 1.3 1.3 2 2.4 2s2-.7 2.3-2l2.1-6.7c.6-1.7 1-3.5 1-5.3 0-1.7-.5-3.3-1.5-4.7C21.5 4.8 19 3 16 3z" fill="#1AADE0" stroke="white" stroke-width="0.8"/>
+    <circle cx="13" cy="10" r="1.2" fill="white" opacity="0.7"/>
+    <circle cx="19" cy="9" r="0.9" fill="white" opacity="0.5"/>
+  </svg>
+</div>
+
+<script>
+// ── CUSTOM CURSOR + TILT 3D ────────────────────────────
+(function() {
+  const aura  = document.getElementById('cursor-aura');
+  const tooth = document.getElementById('cursor-tooth');
+  if (!aura || !tooth) return;
+
+  let mx = -200, my = -200, ax = -200, ay = -200;
+  let raf;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  // Smooth aura with lerp; tooth tracks exactly
+  function tick() {
+    ax += (mx - ax) * 0.13;
+    ay += (my - ay) * 0.13;
+    aura.style.left  = ax + 'px';
+    aura.style.top   = ay + 'px';
+    tooth.style.left = mx + 'px';
+    tooth.style.top  = my + 'px';
+    raf = requestAnimationFrame(tick);
+  }
+  tick();
+
+  // Expand aura on interactive elements
+  const interactiveSelector = 'a, button, .spec-card, .team-card, .rev-card, .loc-card, .case-card, input, select, textarea, .nav-cta, .btn-primary, .btn-outline, .stat-item';
+  document.querySelectorAll(interactiveSelector).forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  // Click pulse
+  document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+  document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+
+  // Hide when leaving window
+  document.addEventListener('mouseleave', () => {
+    aura.style.opacity  = '0';
+    tooth.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    aura.style.opacity  = '1';
+    tooth.style.opacity = '1';
+  });
+})();
+
+// ── TILT 3D + GLOW ────────────────────────────────────
+(function() {
+  const MAX_TILT = 11;
+
+  document.querySelectorAll('.tilt-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;  // -0.5 to 0.5
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `perspective(700px) rotateY(${x * MAX_TILT}deg) rotateX(${-y * MAX_TILT}deg) translateZ(10px)`;
+      card.style.transition = 'transform 0.05s linear, box-shadow 0.15s ease';
+      card.style.boxShadow  = `0 20px 48px rgba(26,173,224,${0.12 + Math.abs(x+y)*0.08})`;
+      const glow = card.querySelector('.tilt-glow');
+      if (glow) glow.style.background = `radial-gradient(circle at ${(x+0.5)*100}% ${(y+0.5)*100}%, rgba(26,173,224,0.22) 0%, transparent 65%)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform  = '';
+      card.style.transition = 'transform 0.4s cubic-bezier(.25,.8,.25,1), box-shadow 0.4s ease';
+      card.style.boxShadow  = '';
+    });
+  });
 })();
 </script>
 </body>
