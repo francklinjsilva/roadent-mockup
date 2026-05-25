@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+*.json.lock
+package-lock.json
+generate_pptx.js
+package.json
