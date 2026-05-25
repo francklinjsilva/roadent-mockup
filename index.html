@@ -399,6 +399,132 @@ footer {
 .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.65); }
 .wa-float svg { width: 30px; height: 30px; fill: #fff; }
 
+/* ── PROCESS STEPS ────────────────────────────────── */
+.process { background: var(--off-white); }
+.process-steps {
+  display: flex; align-items: flex-start; gap: 0;
+  position: relative; margin-top: 64px;
+}
+.process-steps::before {
+  content: '';
+  position: absolute; top: 36px; left: calc(10% + 18px); right: calc(10% + 18px);
+  height: 2px; background: var(--light-gray); z-index: 0;
+}
+.process-step {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  text-align: center; padding: 0 12px; position: relative; cursor: pointer;
+}
+.process-num-wrap {
+  position: relative; z-index: 1; margin-bottom: 24px;
+}
+.process-num {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--white); border: 2px solid var(--light-gray);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; transition: all .35s; position: relative;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.process-step.active .process-num,
+.process-step:hover .process-num {
+  background: var(--brand); border-color: var(--brand);
+  box-shadow: 0 8px 28px rgba(26,173,224,0.35); transform: scale(1.12);
+}
+.process-step-num {
+  position: absolute; top: -6px; right: -6px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--brand); color: #fff;
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .3s;
+}
+.process-step.active .process-step-num { opacity: 1; }
+.process-line {
+  position: absolute; top: 36px; left: 50%; right: -50%;
+  height: 2px; background: var(--light-gray); z-index: 0;
+  transform-origin: left; transition: background .4s;
+}
+.process-step.active .process-line,
+.process-step.done .process-line { background: var(--brand); }
+.process-step:last-child .process-line { display: none; }
+.process-step h4 {
+  font-size: 14px; font-weight: 700; color: var(--dark-text);
+  margin-bottom: 8px; transition: color .3s; line-height: 1.3;
+}
+.process-step.active h4 { color: var(--brand); }
+.process-step p {
+  font-size: 12px; color: var(--mid-gray); line-height: 1.55;
+  max-width: 140px; margin: 0 auto;
+}
+.process-step.active p { color: var(--body-text); }
+.process-cta { text-align: center; margin-top: 52px; }
+
+/* ── REVIEWS CAROUSEL ─────────────────────────────── */
+.reviews { background: var(--white); overflow: hidden; }
+.reviews-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 48px; flex-wrap: wrap; gap: 20px; padding: 0 60px;
+}
+.google-rating-block { display: flex; align-items: center; gap: 16px; }
+.google-icon {
+  width: 44px; height: 44px; border-radius: 8px;
+  background: #fff; border: 1px solid var(--light-gray);
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+.google-score { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; color: var(--dark-text); line-height: 1; }
+.google-stars-row { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+.google-stars-row span { color: #FBBC04; font-size: 18px; letter-spacing: 1px; }
+.google-stars-row small { font-size: 12px; color: var(--mid-gray); margin-left: 4px; }
+.btn-review {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--brand); color: #fff; padding: 14px 26px;
+  border-radius: 4px; font-size: 13px; font-weight: 600; text-decoration: none;
+  transition: background .2s;
+}
+.btn-review:hover { background: var(--brand-dark); }
+
+/* carousel track */
+.carousel-outer { position: relative; }
+.carousel-fade-l, .carousel-fade-r {
+  position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
+}
+.carousel-fade-l { left: 0; background: linear-gradient(to right, #fff 0%, transparent 100%); }
+.carousel-fade-r { right: 0; background: linear-gradient(to left, #fff 0%, transparent 100%); }
+.carousel-track {
+  display: flex; gap: 24px;
+  animation: scrollLeft 40s linear infinite;
+  width: max-content;
+}
+.carousel-track:hover { animation-play-state: paused; }
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.rev-card {
+  background: var(--off-white); border-radius: 14px;
+  padding: 28px 28px 24px; width: 320px; flex-shrink: 0;
+  border: 1px solid var(--light-gray);
+  transition: box-shadow .3s, transform .3s;
+}
+.rev-card:hover { box-shadow: 0 10px 32px rgba(26,173,224,0.10); transform: translateY(-3px); }
+.rev-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+.rev-stars { color: #FBBC04; font-size: 15px; letter-spacing: 1px; }
+.rev-google { font-size: 18px; }
+.rev-text {
+  font-size: 14px; color: var(--body-text); line-height: 1.65;
+  margin-bottom: 20px; font-style: italic;
+  display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+}
+.rev-author { display: flex; align-items: center; gap: 12px; }
+.rev-photo {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 15px; color: #fff;
+  flex-shrink: 0; overflow: hidden;
+}
+.rev-photo img { width: 100%; height: 100%; object-fit: cover; }
+.rev-name { font-size: 13px; font-weight: 600; color: var(--dark-text); }
+.rev-meta { font-size: 11px; color: var(--mid-gray); margin-top: 2px; }
+
 /* ── REVEAL ANIMATIONS ────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -415,6 +541,7 @@ footer {
   .tech-visual { height: 300px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .ig-grid { grid-template-columns: 1fr 1fr; }
+  .reviews-header { padding: 0 32px; }
 }
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
@@ -424,11 +551,18 @@ footer {
   .hero-content { padding: 0; max-width: 100%; }
   .section { padding: 64px 20px; }
   .stats { padding: 40px 20px; grid-template-columns: repeat(2,1fr); }
-  .spec-grid, .cases-grid, .reviews-grid, .loc-grid { grid-template-columns: 1fr; }
+  .spec-grid, .cases-grid, .loc-grid { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: repeat(2,1fr); }
   .ig-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .cta-banner { padding: 72px 20px; }
+  .reviews-header { padding: 0 20px; }
+  .process-steps { flex-direction: column; align-items: center; gap: 32px; }
+  .process-steps::before { display: none; }
+  .process-step { flex-direction: row; text-align: left; gap: 20px; width: 100%; max-width: 340px; }
+  .process-step p { max-width: 100%; }
+  .process-num-wrap { margin-bottom: 0; }
+  .process-line { display: none; }
 }
 </style>
 </head>
@@ -666,57 +800,218 @@ footer {
   </div>
 </section>
 
+<!-- PROCESO DE AGENDAMIENTO -->
+<section class="section process" id="proceso">
+  <div class="section-header reveal" style="text-align:center; max-width:600px; margin-left:auto; margin-right:auto;">
+    <div class="section-tag">¿Cómo funciona?</div>
+    <h2 class="section-title">Tu sonrisa en 5 simples pasos</h2>
+    <p class="section-sub" style="margin:0 auto;">Desde tu primera consulta hasta el resultado final — el proceso es más simple de lo que imaginas.</p>
+  </div>
+  <div class="process-steps reveal" id="processSteps">
+    <div class="process-step active" data-step="0">
+      <div class="process-num-wrap">
+        <div class="process-num">💬</div>
+        <span class="process-step-num">1</span>
+      </div>
+      <h4>Agenda tu consulta</h4>
+      <p>Por WhatsApp, teléfono o formulario. Sin esperas. Confirmamos en minutos.</p>
+    </div>
+    <div class="process-step" data-step="1">
+      <div class="process-num-wrap">
+        <div class="process-num">👨‍⚕️</div>
+        <span class="process-step-num">2</span>
+      </div>
+      <h4>Elige tu especialista</h4>
+      <p>Nuestro equipo te orienta hacia el profesional ideal según tu caso.</p>
+    </div>
+    <div class="process-step" data-step="2">
+      <div class="process-num-wrap">
+        <div class="process-num">🔬</div>
+        <span class="process-step-num">3</span>
+      </div>
+      <h4>Evaluación gratuita</h4>
+      <p>Diagnóstico completo con tecnología digital. Sin compromiso.</p>
+    </div>
+    <div class="process-step" data-step="3">
+      <div class="process-num-wrap">
+        <div class="process-num">📋</div>
+        <span class="process-step-num">4</span>
+      </div>
+      <h4>Acepta tu plan</h4>
+      <p>Recibe un plan de tratamiento personalizado, con tiempos y costos claros.</p>
+    </div>
+    <div class="process-step" data-step="4">
+      <div class="process-num-wrap">
+        <div class="process-num">✨</div>
+        <span class="process-step-num">5</span>
+      </div>
+      <h4>¡Transforma tu sonrisa!</h4>
+      <p>Disfruta tu resultado. Ortodoncia, carillas, implantes — tu nueva sonrisa te espera.</p>
+    </div>
+  </div>
+  <div class="process-cta reveal">
+    <a href="https://wa.me/56978114661" target="_blank" class="btn-primary" style="font-size:15px; padding:16px 36px;">
+      💬 Empezar ahora — es gratis
+    </a>
+  </div>
+</section>
+
 <!-- GOOGLE REVIEWS -->
-<section class="section reviews">
-  <div class="reviews-top">
-    <div class="section-header reveal" style="margin-bottom:0;">
-      <div class="section-tag">Reseñas</div>
+<section class="reviews" id="resenas" style="padding: 100px 0;">
+  <div class="reviews-header reveal">
+    <div>
+      <div class="section-tag">Reseñas Google</div>
       <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
     </div>
     <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
-      <div class="google-badge reveal">
+      <div class="google-rating-block">
+        <div class="google-icon">G</div>
         <div>
-          <div class="google-badge-score">4.9</div>
-          <div class="google-badge-stars">★★★★★</div>
-          <div class="google-badge-count">+180 reseñas en Google</div>
+          <div class="google-score">4.9</div>
+          <div class="google-stars-row">
+            <span>★★★★★</span>
+            <small>+180 reseñas</small>
+          </div>
         </div>
       </div>
-      <a href="https://g.page/r/clinicaroadent/review" target="_blank" class="btn-review reveal">
+      <a href="https://share.google/wHvOjOdgdzYMOfCsJ" target="_blank" class="btn-review">
         ⭐ Deja tu reseña
       </a>
     </div>
   </div>
-  <div class="reviews-grid">
-    <div class="review-card reveal">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Excelente atención del principio al fin. El Dr. Roa explicó todo el proceso de mis implantes con mucha claridad. Los resultados superaron mis expectativas."</p>
-      <div class="review-author">
-        <div class="review-avatar">MP</div>
-        <div>
-          <div class="review-name">María P.</div>
-          <div class="review-date">Hace 2 semanas · Implantes</div>
+
+  <div class="carousel-outer">
+    <div class="carousel-fade-l"></div>
+    <div class="carousel-fade-r"></div>
+    <div class="carousel-track" id="reviewTrack">
+      <!-- SET 1 -->
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Excelente atención del principio al fin. El Dr. Roa explicó todo el proceso de mis implantes con mucha claridad. Los resultados superaron mis expectativas. Totalmente recomendado."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#1AADE0,#0A6A92)">MP</div>
+          <div><div class="rev-name">María Paz González</div><div class="rev-meta">Hace 2 semanas · Implantes Dentales</div></div>
         </div>
       </div>
-    </div>
-    <div class="review-card reveal">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Vine por Invisalign y quedé fascinada. El Dr. Romero es muy profesional y la atención es impecable. La clínica es moderna y el equipo muy amable."</p>
-      <div class="review-author">
-        <div class="review-avatar">CA</div>
-        <div>
-          <div class="review-name">Camila A.</div>
-          <div class="review-date">Hace 1 mes · Invisalign</div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Vine por Invisalign y quedé fascinada. El Dr. Romero es muy profesional y la atención es impecable. La clínica es moderna, limpia y el equipo muy amable con todos."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#E74C7C,#C0392B)">CA</div>
+          <div><div class="rev-name">Camila Araya</div><div class="rev-meta">Hace 1 mes · Invisalign</div></div>
         </div>
       </div>
-    </div>
-    <div class="review-card reveal">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"El blanqueamiento con lámpara Zoom fue increíble. En 1 hora noté el cambio. Personal muy cálido y explicaron cada paso del proceso. 100% recomendado."</p>
-      <div class="review-author">
-        <div class="review-avatar">RP</div>
-        <div>
-          <div class="review-name">Roberto P.</div>
-          <div class="review-date">Hace 3 semanas · Blanqueamiento</div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"El blanqueamiento con lámpara Zoom fue increíble. En 1 hora noté el cambio. Personal muy cálido y explicaron cada paso del proceso. Lo recomiendo ampliamente."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#27AE60,#1E8449)">RP</div>
+          <div><div class="rev-name">Roberto Pizarro</div><div class="rev-meta">Hace 3 semanas · Blanqueamiento Zoom</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Me hicieron las carillas de porcelana y el resultado es impresionante. Desde la primera consulta hasta el final sentí confianza total. El Dr. Roa es un experto de verdad."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#F39C12,#D35400)">VL</div>
+          <div><div class="rev-name">Valentina López</div><div class="rev-meta">Hace 5 semanas · Carillas de Porcelana</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Llevé a mi hijo a odontopediatría y fue una experiencia increíble. La Dra. Molgas es maravillosa con los niños. Salió feliz y sin miedo. ¡Eso lo dice todo!"</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#8E44AD,#6C3483)">AS</div>
+          <div><div class="rev-name">Andrea Soto</div><div class="rev-meta">Hace 2 meses · Odontopediatría</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Excelente clínica. Vine por una endodoncia y fue indolora. El Dr. Ramírez es muy hábil y tranquilizador. La tecnología que usan es de primer nivel. Muy agradecido."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#2C3E50,#1A252F)">JM</div>
+          <div><div class="rev-name">Jorge Muñoz</div><div class="rev-meta">Hace 6 semanas · Endodoncia</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Llevo 14 meses con Invisalign y estoy en la recta final. Los resultados son exactamente lo que me mostraron en el plan digital. Servicio y seguimiento impecables."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#1ABC9C,#148F77)">FC</div>
+          <div><div class="rev-name">Felipe Castillo</div><div class="rev-meta">Hace 2 semanas · Ortodoncia Invisalign</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Me rehabilitaron toda la boca con implantes y prótesis. Un trabajo muy serio, detallado y con resultado natural. Hoy puedo comer y sonreír sin ninguna vergüenza. Gracias totales."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#E74C7C,#8E44AD)">LR</div>
+          <div><div class="rev-name">Luisa Reyes</div><div class="rev-meta">Hace 3 meses · Rehabilitación Oral</div></div>
+        </div>
+      </div>
+      <!-- SET 2 (duplicado para loop infinito) -->
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Excelente atención del principio al fin. El Dr. Roa explicó todo el proceso de mis implantes con mucha claridad. Los resultados superaron mis expectativas. Totalmente recomendado."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#1AADE0,#0A6A92)">MP</div>
+          <div><div class="rev-name">María Paz González</div><div class="rev-meta">Hace 2 semanas · Implantes Dentales</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Vine por Invisalign y quedé fascinada. El Dr. Romero es muy profesional y la atención es impecable. La clínica es moderna, limpia y el equipo muy amable con todos."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#E74C7C,#C0392B)">CA</div>
+          <div><div class="rev-name">Camila Araya</div><div class="rev-meta">Hace 1 mes · Invisalign</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"El blanqueamiento con lámpara Zoom fue increíble. En 1 hora noté el cambio. Personal muy cálido y explicaron cada paso del proceso. Lo recomiendo ampliamente."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#27AE60,#1E8449)">RP</div>
+          <div><div class="rev-name">Roberto Pizarro</div><div class="rev-meta">Hace 3 semanas · Blanqueamiento Zoom</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Me hicieron las carillas de porcelana y el resultado es impresionante. Desde la primera consulta hasta el final sentí confianza total. El Dr. Roa es un experto de verdad."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#F39C12,#D35400)">VL</div>
+          <div><div class="rev-name">Valentina López</div><div class="rev-meta">Hace 5 semanas · Carillas de Porcelana</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Llevé a mi hijo a odontopediatría y fue una experiencia increíble. La Dra. Molgas es maravillosa con los niños. Salió feliz y sin miedo. ¡Eso lo dice todo!"</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#8E44AD,#6C3483)">AS</div>
+          <div><div class="rev-name">Andrea Soto</div><div class="rev-meta">Hace 2 meses · Odontopediatría</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Excelente clínica. Vine por una endodoncia y fue indolora. El Dr. Ramírez es muy hábil y tranquilizador. La tecnología que usan es de primer nivel. Muy agradecido."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#2C3E50,#1A252F)">JM</div>
+          <div><div class="rev-name">Jorge Muñoz</div><div class="rev-meta">Hace 6 semanas · Endodoncia</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Llevo 14 meses con Invisalign y estoy en la recta final. Los resultados son exactamente lo que me mostraron en el plan digital. Servicio y seguimiento impecables."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#1ABC9C,#148F77)">FC</div>
+          <div><div class="rev-name">Felipe Castillo</div><div class="rev-meta">Hace 2 semanas · Ortodoncia Invisalign</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-top"><div class="rev-stars">★★★★★</div><span class="rev-google">🇬</span></div>
+        <p class="rev-text">"Me rehabilitaron toda la boca con implantes y prótesis. Un trabajo muy serio, detallado y con resultado natural. Hoy puedo comer y sonreír sin ninguna vergüenza. Gracias totales."</p>
+        <div class="rev-author">
+          <div class="rev-photo" style="background:linear-gradient(135deg,#E74C7C,#8E44AD)">LR</div>
+          <div><div class="rev-name">Luisa Reyes</div><div class="rev-meta">Hace 3 meses · Rehabilitación Oral</div></div>
         </div>
       </div>
     </div>
@@ -903,6 +1198,49 @@ const navEl = document.querySelector('nav');
 window.addEventListener('scroll', () => {
   navEl.style.height = window.scrollY > 60 ? '60px' : '72px';
 });
+
+// Process steps — auto-cycle + click
+(function() {
+  const steps = document.querySelectorAll('.process-step');
+  if (!steps.length) return;
+  let current = 0;
+  let timer;
+
+  function activate(idx) {
+    steps.forEach((s, i) => {
+      s.classList.remove('active', 'done');
+      if (i < idx) s.classList.add('done');
+    });
+    steps[idx].classList.add('active');
+    current = idx;
+  }
+
+  function next() {
+    activate((current + 1) % steps.length);
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, 2600);
+  }
+
+  steps.forEach((s, i) => {
+    s.addEventListener('click', () => { activate(i); startTimer(); });
+    s.addEventListener('mouseenter', () => { clearInterval(timer); activate(i); });
+    s.addEventListener('mouseleave', () => startTimer());
+  });
+
+  // Start cycling when section enters viewport
+  const processSection = document.querySelector('.process');
+  if (processSection) {
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) startTimer();
+        else clearInterval(timer);
+      });
+    }, { threshold: 0.3 }).observe(processSection);
+  }
+})();
 </script>
 </body>
 </html>
