@@ -251,6 +251,9 @@
     .navy-section .list li { color: rgba(255,255,255,.8); }
     .dark-section .list li::before,
     .navy-section .list li::before { background: rgba(22,163,107,.2); color: #4ade80; }
+    /* Override: .price-card (white bg) inside .dark-section must keep dark text */
+    .price-card .list li { color: #40506a; }
+    .price-card .list li::before { background: #e9f9f2; color: var(--green); }
 
     /* ── TRAINING SECTION ─────────────────────────────── */
     .training-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 36px; align-items: start; }
@@ -335,6 +338,39 @@
     }
     .closing-chip.highlight { background: linear-gradient(135deg, var(--blue), var(--cyan)); color: white; border-color: transparent; }
 
+    /* ── URL TABLE ────────────────────────────────────── */
+    .url-section-title {
+      font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
+      margin: 0 0 12px; display: flex; align-items: center; gap: 8px;
+    }
+    .url-table {
+      width: 100%; border-collapse: collapse; font-size: 13px;
+      background: white; border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--line); box-shadow: 0 6px 18px rgba(25,45,90,.06);
+    }
+    .url-table th {
+      background: var(--navy); color: rgba(255,255,255,.85);
+      padding: 10px 16px; text-align: left; font-size: 11px;
+      font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .url-table td { padding: 9px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .url-table tr:last-child td { border-bottom: none; }
+    .url-table tr:hover td { background: #f8fbff; }
+    .url-slug {
+      font-family: 'Courier New', monospace; font-size: 12px;
+      color: var(--blue); font-weight: 700;
+    }
+    .url-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 10px; font-weight: 800; padding: 3px 8px;
+      border-radius: 6px; white-space: nowrap;
+    }
+    .url-badge.preserved { background: #e8fdf3; color: #065f46; }
+    .url-badge.new-page { background: #e8f5ff; color: #0b5a9c; }
+    .url-badge.seo { background: #fdf6e3; color: #7c5a0a; }
+    .url-badge.blog { background: #f3e8ff; color: #6b21a8; }
+    .url-note { font-size: 12px; color: var(--muted); }
+
     /* ── FOOTER ──────────────────────────────────────── */
     footer { padding: 36px 20px; text-align: center; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); background: white; }
 
@@ -369,7 +405,7 @@
       <a href="#alcance">Alcance</a>
       <a href="#entregables">Entregables</a>
       <a href="#roadmap">Roadmap</a>
-      <a href="#analytics">Analytics</a>
+      <a href="#urls">URLs</a>
       <a href="#inversion">Inversión</a>
       <a href="#cierre" class="btn btn-primary" style="font-size:13px;padding:10px 18px">Ver inversión</a>
     </div>
@@ -842,6 +878,172 @@
   </div>
 </section>
 
+<!-- ── URLs DEL PROYECTO ──────────────────────────────────────── -->
+<section class="white" id="urls">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">Mapa de páginas</div>
+      <h2>Todas las URLs del proyecto, <span class="grad">una por una</span></h2>
+      <p>Este es el inventario completo de páginas que se trabajarán: las existentes que se llevan al nuevo formato (preservando su posicionamiento SEO) y las nuevas que se crean como parte de esta implementación.</p>
+    </div>
+
+    <!-- URLs EXISTENTES -->
+    <div style="margin-bottom:32px">
+      <div class="url-section-title">
+        <span style="background:#e8fdf3;color:#065f46;padding:4px 10px;border-radius:6px;font-size:11px">✅ Existentes</span>
+        Páginas actuales que se convierten al nuevo formato premium
+      </div>
+      <table class="url-table">
+        <thead>
+          <tr>
+            <th style="width:38%">URL</th>
+            <th style="width:28%">Página</th>
+            <th style="width:18%">Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="url-slug">clinicaroadent.cl/</span></td>
+            <td>Home principal</td>
+            <td><span class="url-badge preserved">✅ Existente</span></td>
+            <td class="url-note">Rediseño completo: hero video, equipo, especialidades, casos, reviews, sedes</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/invisalign-copiapo/</span></td>
+            <td>Invisalign Copiapó</td>
+            <td><span class="url-badge seo">⭐ SEO crítica</span></td>
+            <td class="url-note">Se preserva la URL exacta. Rediseño de la página al nuevo formato</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/implantes-dentales/</span></td>
+            <td>Implantes Dentales</td>
+            <td><span class="url-badge seo">⭐ SEO crítica</span></td>
+            <td class="url-note">Se preserva la URL exacta. Rediseño de la página al nuevo formato</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/ortodoncia-con-alineadores-invisalign/</span></td>
+            <td>Ortodoncia con alineadores</td>
+            <td><span class="url-badge seo">⭐ SEO crítica</span></td>
+            <td class="url-note">Se preserva la URL exacta. Rediseño de la página al nuevo formato</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/endodoncia/</span></td>
+            <td>Endodoncia</td>
+            <td><span class="url-badge seo">⭐ SEO crítica</span></td>
+            <td class="url-note">Se preserva la URL exacta. Rediseño de la página al nuevo formato</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/blanqueamiento-dental-con-lampara-zoom-philips/</span></td>
+            <td>Blanqueamiento Zoom Philips</td>
+            <td><span class="url-badge seo">⭐ SEO crítica</span></td>
+            <td class="url-note">Se preserva la URL exacta. Rediseño de la página al nuevo formato</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/blog-roadent/</span></td>
+            <td>Blog RoaDent</td>
+            <td><span class="url-badge blog">📝 Blog</span></td>
+            <td class="url-note">Se preserva la URL y los 9 artículos indexados. Rediseño del layout</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/blog-roadent/[9 artículos]</span></td>
+            <td>Artículos del blog</td>
+            <td><span class="url-badge blog">📝 Blog</span></td>
+            <td class="url-note">URLs a confirmar en auditoría inicial. Se preservan sin cambios de slug</td>
+          </tr>
+          <tr>
+            <td colspan="4" style="background:#fffbe6;padding:10px 16px;font-size:12px;color:#7c5a0a">
+              ⚠️ <strong>Nota:</strong> Pueden existir páginas adicionales en el sitio actual (contacto, sobre nosotros, etc.) que se auditarán en la Etapa 2. Todas las URLs activas se preservan o redirigen correctamente.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- URLs NUEVAS -->
+    <div>
+      <div class="url-section-title">
+        <span style="background:#e8f5ff;color:#0b5a9c;padding:4px 10px;border-radius:6px;font-size:11px">🆕 Nuevas</span>
+        Páginas nuevas que se crean en esta implementación
+      </div>
+      <table class="url-table">
+        <thead>
+          <tr>
+            <th style="width:38%">URL propuesta</th>
+            <th style="width:28%">Página</th>
+            <th style="width:18%">Estado</th>
+            <th>Contenido</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="url-slug">/equipo-clinico/</span></td>
+            <td>Equipo Clínico</td>
+            <td><span class="url-badge new-page">🆕 Nueva</span></td>
+            <td class="url-note">Perfiles completos de todos los especialistas con foto, cargo y especialidad</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/tecnologia/</span></td>
+            <td>Tecnología RoaDent</td>
+            <td><span class="url-badge new-page">🆕 Nueva</span></td>
+            <td class="url-note">Invisalign, CBCT, escáneres intraorales y flujo digital de tratamiento</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/casos-clinicos/</span></td>
+            <td>Casos Clínicos</td>
+            <td><span class="url-badge new-page">🆕 Nueva</span></td>
+            <td class="url-note">Galería antes/después, testimonios en video, casos por especialidad</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/sedes/</span></td>
+            <td>Sedes RoaDent</td>
+            <td><span class="url-badge new-page">🆕 Nueva</span></td>
+            <td class="url-note">Página general con mapa de ambas sedes, horarios y enlaces de agendamiento</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/sedes/sede-centro/</span></td>
+            <td>Sede Centro</td>
+            <td><span class="url-badge new-page">🆕 Nueva</span></td>
+            <td class="url-note">Los Carrera 541 · Mapa, horarios, fotos, QR de agendamiento, especialidades</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/sedes/sede-norte/</span></td>
+            <td>Sede Norte</td>
+            <td><span class="url-badge new-page">🆕 Nueva</span></td>
+            <td class="url-note">Av. Copayapu 3800 · Mapa, horarios, fotos, QR de agendamiento, especialidades</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/carillas-de-porcelana/</span></td>
+            <td>Carillas de Porcelana</td>
+            <td><span class="url-badge new-page">🆕 Nueva</span></td>
+            <td class="url-note">Página de especialidad nueva: diseño de sonrisa, laminados, galería de casos</td>
+          </tr>
+          <tr>
+            <td><span class="url-slug">/odontopediatria/</span></td>
+            <td>Odontopediatría</td>
+            <td><span class="url-badge new-page">🆕 Nueva</span></td>
+            <td class="url-note">Página de especialidad nueva: atención de niños, ambiente clínico, equipo</td>
+          </tr>
+          <tr>
+            <td colspan="4" style="background:#f0f7ff;padding:10px 16px;font-size:12px;color:#0b5a9c">
+              ℹ️ <strong>Nota:</strong> Las URLs nuevas se definen en conjunto con el equipo RoaDent durante la auditoría inicial. Los slugs propuestos son una sugerencia basada en buenas prácticas SEO y pueden ajustarse según lo que ya exista en el sitio.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:20px;background:#f8fbff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;display:flex;align-items:flex-start;gap:12px">
+      <div style="font-size:20px">🔒</div>
+      <div>
+        <strong style="display:block;font-size:14px;margin-bottom:4px">Política SEO: ninguna URL posicionada se elimina sin respaldo</strong>
+        <div style="font-size:13px;color:var(--muted)">Todas las URLs existentes con posicionamiento en Google se preservan exactamente o se redirigen con código 301. El proyecto incluye una auditoría inicial para mapear el 100% de las URLs activas antes de cualquier cambio.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ── INVERSIÓN ─────────────────────────────────────────────── -->
 <section class="dark-section" id="inversion">
   <div class="container">
@@ -865,20 +1067,20 @@
         El dashboard y el sitio son entregados sin cuota mensual. Actualizaciones menores de contenido (fotos, textos, especialistas) pueden realizarse a través de los paneles autoadministrables. Actualizaciones técnicas de mayor envergadura se cotizarán puntualmente según requerimiento.
       </div>
 
-      <h4 style="font-size:17px;margin:24px 0 12px;letter-spacing:-.02em">Condiciones de pago sugeridas</h4>
+      <h4 style="font-size:17px;margin:24px 0 12px;letter-spacing:-.02em">Condiciones de pago</h4>
       <div class="payment-terms">
         <div class="payment-step">
           <div class="payment-step-num">1</div>
           <div class="payment-step-text">
-            <strong>50% al inicio — USD $750</strong>
-            <span>Al firmar el acuerdo de trabajo y antes de comenzar la etapa de diseño.</span>
+            <strong>67% al inicio — USD $1,000</strong>
+            <span>Al firmar el acuerdo y antes de iniciar diseño e implementación.</span>
           </div>
         </div>
         <div class="payment-step">
           <div class="payment-step-num">2</div>
           <div class="payment-step-text">
-            <strong>50% al lanzamiento — USD $750</strong>
-            <span>Al publicar el nuevo sitio web y entregar el acceso al CRM y paneles.</span>
+            <strong>33% al lanzamiento — USD $500</strong>
+            <span>Al publicar el nuevo sitio y entregar acceso al CRM y paneles.</span>
           </div>
         </div>
       </div>
@@ -958,6 +1160,7 @@
       <span class="closing-chip">Sin cuota mensual de plataforma</span>
       <span class="closing-chip">Sitio completo + CRM + Analytics</span>
       <span class="closing-chip">3 semanas de capacitación incluidas</span>
+      <span class="closing-chip">$1,000 inicio · $500 al lanzamiento</span>
       <span class="closing-chip">12–14 semanas de implementación</span>
     </div>
     <div style="margin-top:36px">
