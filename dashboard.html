@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoaDent CRM — Panel Comercial</title>
+<link rel="icon" type="image/webp" href="https://clinicaroadent.cl/wp-content/uploads/2023/05/LOGO_ROADENT-removebg-preview.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:        #0A1A2E;
+  --navy-mid:    #0F2845;
+  --navy-light:  #1B3A6B;
+  --brand:       #1AADE0;
+  --brand-dark:  #0D88B8;
+  --brand-light: #E6F7FD;
+  --bg:          #EEF2F7;
+  --card-bg:     #FFFFFF;
+  --text:        #1A2540;
+  --text-mid:    #4B5563;
+  --text-light:  #9CA3AF;
+  --border:      #E5E7EB;
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:   0 4px 16px rgba(0,0,0,0.10);
+  --radius:      10px;
+  /* Stage */
+  --nuevo:       #F59E0B;
+  --contactado:  #3B82F6;
+  --agendado:    #8B5CF6;
+  --confirmado:  #06B6D4;
+  --atendido:    #10B981;
+  --convertido:  #059669;
+  --perdido:     #EF4444;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── SIDEBAR ─────────────────────────────────────── */
+.sidebar {
+  width: 220px;
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  z-index: 50;
+  transition: width .25s ease;
+}
+.sidebar-logo {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sidebar-logo img { height: 32px; filter: brightness(0) invert(1); }
+.sidebar-logo-text { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: .3px; }
+.sidebar-logo-text small { display: block; color: var(--brand); font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
+.sidebar-nav { padding: 16px 0; flex: 1; }
+.nav-section-label {
+  padding: 8px 20px 4px;
+  color: rgba(255,255,255,0.35);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  color: rgba(255,255,255,0.65);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+  border-left: 3px solid transparent;
+  text-decoration: none;
+}
+.nav-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+.nav-item.active { color: var(--brand); background: rgba(26,173,224,0.1); border-left-color: var(--brand); }
+.nav-item .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+.nav-badge {
+  margin-left: auto;
+  background: var(--brand);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sidebar-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 13px; font-weight: 700;
+}
+.sidebar-user-info { flex: 1; }
+.sidebar-user-name { color: #fff; font-size: 12px; font-weight: 600; }
+.sidebar-user-role { color: rgba(255,255,255,0.45); font-size: 10px; }
+
+/* ── MAIN ─────────────────────────────────────────── */
+.main {
+  margin-left: 220px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── TOPBAR ──────────────────────────────────────── */
+.topbar {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+.topbar-title { font-size: 17px; font-weight: 700; color: var(--text); flex-shrink: 0; }
+.topbar-title span { color: var(--brand); }
+.topbar-search {
+  flex: 1;
+  max-width: 340px;
+  position: relative;
+}
+.topbar-search input {
+  width: 100%;
+  padding: 9px 14px 9px 38px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg);
+  transition: border-color .2s;
+  outline: none;
+}
+.topbar-search input:focus { border-color: var(--brand); }
+.topbar-search .search-icon {
+  position: absolute; left: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light); font-size: 14px;
+}
+.topbar-filters { display: flex; gap: 8px; }
+.filter-chip {
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-mid);
+  background: #fff;
+  cursor: pointer;
+  transition: all .2s;
+}
+.filter-chip:hover { border-color: var(--brand); color: var(--brand); }
+.filter-chip.active { border-color: var(--brand); background: var(--brand); color: #fff; }
+.topbar-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.btn-sync {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  color: var(--text-mid);
+  background: #fff;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-sync:hover { border-color: #34A853; color: #34A853; }
+.btn-sync.syncing { color: var(--brand); border-color: var(--brand); animation: pulse 1s infinite; }
+.btn-new-lead {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 18px;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+}
+.btn-new-lead:hover { background: var(--brand-dark); }
+.btn-view-toggle {
+  display: flex;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.btn-view {
+  padding: 7px 12px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  color: var(--text-light);
+  font-size: 14px;
+  transition: all .2s;
+}
+.btn-view.active { background: var(--navy); color: #fff; }
+
+/* ── KPI ROW ─────────────────────────────────────── */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  padding: 24px 28px 0;
+}
+.kpi-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--kpi-color, var(--brand));
+}
+.kpi-label { font-size: 11px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: .8px; }
+.kpi-value { font-size: 30px; font-weight: 800; color: var(--text); line-height: 1; }
+.kpi-sub { font-size: 11px; color: var(--text-light); }
+.kpi-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 28px; opacity: .15; }
+.kpi-trend { font-size: 11px; font-weight: 600; }
+.kpi-trend.up { color: #10B981; }
+.kpi-trend.down { color: #EF4444; }
+
+/* ── PIPELINE ─────────────────────────────────────── */
+.pipeline-section { padding: 20px 28px 32px; flex: 1; }
+.pipeline-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.pipeline-header h2 { font-size: 15px; font-weight: 700; }
+.pipeline-wrap {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  min-height: calc(100vh - 340px);
+}
+.pipeline-wrap::-webkit-scrollbar { height: 6px; }
+.pipeline-wrap::-webkit-scrollbar-track { background: transparent; }
+.pipeline-wrap::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+
+/* ── KANBAN COLUMN ───────────────────────────────── */
+.kanban-col {
+  min-width: 240px;
+  max-width: 240px;
+  background: rgba(255,255,255,0.6);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 310px);
+}
+.kanban-col.drag-over { background: var(--brand-light); border-color: var(--brand); }
+.col-header {
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: sticky;
+  top: 0;
+  background: inherit;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.col-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.col-name { font-size: 12px; font-weight: 700; color: var(--text); flex: 1; }
+.col-count {
+  font-size: 11px; font-weight: 700;
+  background: var(--border);
+  color: var(--text-mid);
+  padding: 2px 8px;
+  border-radius: 10px;
+  min-width: 24px;
+  text-align: center;
+}
+.col-body {
+  padding: 10px 10px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.col-body::-webkit-scrollbar { width: 4px; }
+.col-body::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+.col-empty {
+  text-align: center;
+  padding: 24px 12px;
+  color: var(--text-light);
+  font-size: 12px;
+}
+.col-empty .col-empty-icon { font-size: 24px; margin-bottom: 6px; opacity: .5; }
+
+/* ── LEAD CARD ───────────────────────────────────── */
+.lead-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 12px 12px 10px;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: all .2s;
+  position: relative;
+  draggable: true;
+}
+.lead-card:hover { border-color: var(--brand); box-shadow: 0 4px 12px rgba(26,173,224,0.15); transform: translateY(-1px); }
+.lead-card.dragging { opacity: 0.5; }
+.card-top { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.card-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.card-info { flex: 1; min-width: 0; }
+.card-name { font-size: 12px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-contact { font-size: 11px; color: var(--text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-specialty {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  background: var(--brand-light);
+  color: var(--brand-dark);
+  margin-bottom: 8px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.card-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.card-meta-item { font-size: 10px; color: var(--text-light); display: flex; align-items: center; gap: 3px; }
+.card-actions { display: flex; align-items: center; gap: 4px; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px; }
+.card-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-mid);
+  transition: all .15s;
+  flex-shrink: 0;
+}
+.card-btn:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-light); }
+.card-btn.wa:hover { border-color: #25D366; color: #25D366; background: #f0fff4; }
+.card-btn.danger:hover { border-color: var(--perdido); color: var(--perdido); }
+.card-btn-advance {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 4px;
+  padding: 4px 10px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 10px; font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+  white-space: nowrap;
+}
+.card-btn-advance:hover { background: var(--brand-dark); }
+.card-origin-badge {
+  position: absolute;
+  top: 8px; right: 8px;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text-light);
+}
+.card-note-count {
+  font-size: 10px; color: var(--text-light);
+  display: flex; align-items: center; gap: 3px;
+}
+
+/* ── TABLE VIEW ──────────────────────────────────── */
+.table-view { padding: 20px 28px; display: none; }
+.data-table {
+  width: 100%;
+  background: #fff;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.data-table table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  background: var(--navy);
+  color: rgba(255,255,255,0.8);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 12px 16px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--bg); }
+.stage-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ── MODALS ──────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,26,46,0.7);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+  animation: fadeIn .2s ease;
+}
+.modal-overlay.open { display: flex; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+  background: #fff;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+  animation: slideUp .25s ease;
+}
+.modal.modal-lg { max-width: 780px; }
+.modal.modal-sm { max-width: 460px; }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.modal-header h3 { font-size: 16px; font-weight: 700; flex: 1; }
+.modal-header p { font-size: 12px; color: var(--text-light); }
+.btn-close {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-mid);
+  transition: all .2s;
+}
+.btn-close:hover { background: #fee; border-color: #f00; color: #f00; }
+.modal-body { padding: 20px 24px; }
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* ── FORMS ───────────────────────────────────────── */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-size: 12px; font-weight: 600; color: var(--text); }
+.form-label .req { color: var(--brand); }
+.form-control {
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color .2s;
+  background: #fff;
+  width: 100%;
+}
+.form-control:focus { border-color: var(--brand); }
+.form-control::placeholder { color: var(--text-light); }
+textarea.form-control { resize: vertical; min-height: 80px; }
+
+/* ── BUTTONS ─────────────────────────────────────── */
+.btn-primary {
+  padding: 10px 22px;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+}
+.btn-primary:hover { background: var(--brand-dark); }
+.btn-secondary {
+  padding: 10px 22px;
+  background: #fff;
+  color: var(--text-mid);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-secondary:hover { border-color: var(--brand); color: var(--brand); }
+.btn-wa {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 22px;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px; font-weight: 700;
+  cursor: pointer;
+  transition: background .2s;
+}
+.btn-wa:hover { background: #1da851; }
+.btn-danger {
+  padding: 10px 22px;
+  background: #FEF2F2;
+  color: var(--perdido);
+  border: 1.5px solid #FECACA;
+  border-radius: 8px;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer;
+}
+.btn-danger:hover { background: var(--perdido); color: #fff; }
+
+/* ── LEAD DETAIL MODAL ───────────────────────────── */
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.detail-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+}
+.detail-name { font-size: 18px; font-weight: 800; }
+.detail-contact { font-size: 13px; color: var(--text-mid); }
+.detail-stage-select {
+  margin-left: auto;
+  padding: 8px 14px;
+  border: 2px solid var(--brand);
+  border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  color: var(--brand);
+  background: var(--brand-light);
+  cursor: pointer;
+  outline: none;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.detail-field { display: flex; flex-direction: column; gap: 3px; }
+.detail-field-label { font-size: 10px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: .8px; }
+.detail-field-value { font-size: 13px; font-weight: 600; color: var(--text); }
+.detail-notes { margin-top: 20px; }
+.detail-notes h4 { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+.notes-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.note-item {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--text);
+  border-left: 3px solid var(--brand);
+}
+.note-item small { display: block; color: var(--text-light); font-size: 10px; margin-bottom: 3px; }
+.note-add { display: flex; gap: 8px; }
+.note-add input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 12px;
+  outline: none;
+}
+.note-add input:focus { border-color: var(--brand); }
+.note-add button {
+  padding: 9px 16px;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer;
+}
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 14px;
+  position: relative;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 13px;
+  top: 24px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.timeline-item:last-child::before { display: none; }
+.timeline-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--brand-light);
+  border: 2px solid var(--brand);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.timeline-content { flex: 1; }
+.timeline-title { font-size: 12px; font-weight: 600; }
+.timeline-time { font-size: 10px; color: var(--text-light); }
+
+/* ── GOOGLE SHEETS MODAL ─────────────────────────── */
+.sheets-step {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+.sheets-step-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.sheets-step-content { flex: 1; }
+.sheets-step-content strong { display: block; font-size: 13px; margin-bottom: 3px; }
+.sheets-step-content p { font-size: 12px; color: var(--text-mid); }
+.code-block {
+  background: var(--navy);
+  color: #7DD3FC;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  line-height: 1.6;
+  margin: 8px 0;
+  overflow-x: auto;
+}
+
+/* ── WA FLOAT BUTTON ─────────────────────────────── */
+.wa-float {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 58px; height: 58px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+  z-index: 900;
+  transition: all .3s;
+  border: none;
+}
+.wa-float:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(37,211,102,0.55); }
+.wa-float svg { width: 30px; height: 30px; fill: #fff; }
+.wa-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: rgba(37,211,102,0.3);
+  animation: waPulse 2s infinite;
+}
+@keyframes waPulse {
+  0% { transform: scale(1); opacity: 1; }
+  70% { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ── WA FORM MODAL ───────────────────────────────── */
+.wa-modal-header {
+  background: linear-gradient(135deg, #075E54 0%, #128C7E 100%);
+  border-radius: 14px 14px 0 0;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.wa-modal-header .wa-logo {
+  width: 44px; height: 44px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.wa-modal-header .wa-logo svg { width: 26px; height: 26px; fill: #25D366; }
+.wa-modal-header-text h3 { font-size: 16px; font-weight: 700; color: #fff; }
+.wa-modal-header-text p { font-size: 12px; color: rgba(255,255,255,0.75); }
+.wa-modal-header .btn-close { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #fff; margin-left: auto; }
+.wa-modal-header .btn-close:hover { background: rgba(255,255,255,0.3); color: #fff; }
+.wa-chat-bubble {
+  background: #DCF8C6;
+  border-radius: 0 12px 12px 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #111;
+  margin-bottom: 16px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+.wa-chat-bubble::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -8px;
+  border: 8px solid transparent;
+  border-top-color: #DCF8C6;
+  border-right-color: #DCF8C6;
+}
+
+/* ── TOAST ───────────────────────────────────────── */
+.toast-container {
+  position: fixed;
+  top: 20px; right: 20px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  background: var(--navy);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: toastIn .3s ease, toastOut .3s ease 3.5s forwards;
+  pointer-events: auto;
+}
+.toast.success { border-left: 4px solid #10B981; }
+.toast.error { border-left: 4px solid var(--perdido); }
+.toast.info { border-left: 4px solid var(--brand); }
+@keyframes toastIn { from { transform: translateX(60px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes toastOut { from { opacity: 1; } to { opacity: 0; transform: translateX(60px); } }
+
+/* ── MISC ────────────────────────────────────────── */
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
+.badge-origin {
+  font-size: 9px; font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.badge-origin.web { background: #EFF6FF; color: #3B82F6; }
+.badge-origin.wa { background: #F0FFF4; color: #059669; }
+.badge-origin.tel { background: #FEF3C7; color: #D97706; }
+.section-divider { height: 1px; background: var(--border); margin: 16px 0; }
+select.form-control option { color: var(--text); }
+
+/* ── STATS BAR ───────────────────────────────────── */
+.pipeline-legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-mid);
+}
+.legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+</style>
+</head>
+<body>
+
+<!-- ── SIDEBAR ──────────────────────────────────────────────── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="https://clinicaroadent.cl/wp-content/uploads/2023/05/LOGO_ROADENT-removebg-preview.webp" alt="RoaDent">
+    <div class="sidebar-logo-text">
+      RoaDent
+      <small>CRM Comercial</small>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Pipeline</div>
+    <a class="nav-item active" onclick="showView('pipeline')">
+      <span class="nav-icon">📋</span> Pipeline
+      <span class="nav-badge" id="badge-total">0</span>
+    </a>
+    <a class="nav-item" onclick="showView('table')">
+      <span class="nav-icon">📊</span> Tabla
+    </a>
+    <div class="nav-section-label" style="margin-top:12px">Etapas</div>
+    <a class="nav-item" onclick="filterByStage('nuevo')">
+      <span class="nav-icon">🔵</span> Nuevos
+      <span class="nav-badge" id="sidebar-nuevo" style="background:#F59E0B">0</span>
+    </a>
+    <a class="nav-item" onclick="filterByStage('agendado')">
+      <span class="nav-icon">📅</span> Agendados
+      <span class="nav-badge" id="sidebar-agendado" style="background:#8B5CF6">0</span>
+    </a>
+    <a class="nav-item" onclick="filterByStage('convertido')">
+      <span class="nav-icon">💚</span> Convertidos
+      <span class="nav-badge" id="sidebar-convertido" style="background:#059669">0</span>
+    </a>
+    <a class="nav-item" onclick="filterByStage('perdido')">
+      <span class="nav-icon">❌</span> Perdidos
+      <span class="nav-badge" id="sidebar-perdido" style="background:#EF4444">0</span>
+    </a>
+    <div class="nav-section-label" style="margin-top:12px">Herramientas</div>
+    <a class="nav-item" onclick="openSheetsModal()">
+      <span class="nav-icon">📗</span> Google Sheets
+    </a>
+    <a class="nav-item" onclick="exportCSV()">
+      <span class="nav-icon">⬇️</span> Exportar CSV
+    </a>
+    <a class="nav-item" onclick="clearAllData()">
+      <span class="nav-icon">🗑️</span> Limpiar datos
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">CA</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name">Área Comercial</div>
+        <div class="sidebar-user-role">RoaDent · Copiapó</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ── MAIN ──────────────────────────────────────────────────── -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-title">Panel de <span>Prospectos</span></div>
+    <div class="topbar-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Buscar por nombre, teléfono, especialidad…" oninput="renderAll()">
+    </div>
+    <div class="topbar-filters" id="specialtyFilters">
+      <button class="filter-chip active" onclick="setFilter('all', this)">Todos</button>
+      <button class="filter-chip" onclick="setFilter('Invisalign', this)">Invisalign</button>
+      <button class="filter-chip" onclick="setFilter('Implantes', this)">Implantes</button>
+      <button class="filter-chip" onclick="setFilter('Carillas', this)">Carillas</button>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn-sync" id="syncBtn" onclick="syncToSheets()" title="Sincronizar con Google Sheets">
+        📗 Sync Sheets
+      </button>
+      <div class="btn-view-toggle">
+        <button class="btn-view active" id="viewPipeline" onclick="showView('pipeline')" title="Vista Pipeline">⣿</button>
+        <button class="btn-view" id="viewTable" onclick="showView('table')" title="Vista Tabla">≡</button>
+      </div>
+      <button class="btn-new-lead" onclick="openNewLead()">
+        ＋ Nuevo prospecto
+      </button>
+    </div>
+  </div>
+
+  <!-- KPI ROW -->
+  <div class="kpi-row">
+    <div class="kpi-card" style="--kpi-color:#F59E0B">
+      <div class="kpi-label">Total prospectos</div>
+      <div class="kpi-value" id="kpi-total">0</div>
+      <div class="kpi-sub">este mes</div>
+      <div class="kpi-icon">👤</div>
+    </div>
+    <div class="kpi-card" style="--kpi-color:#8B5CF6">
+      <div class="kpi-label">Citas agendadas</div>
+      <div class="kpi-value" id="kpi-agendados">0</div>
+      <div class="kpi-sub">en pipeline</div>
+      <div class="kpi-icon">📅</div>
+    </div>
+    <div class="kpi-card" style="--kpi-color:#10B981">
+      <div class="kpi-label">Tasa conversión</div>
+      <div class="kpi-value" id="kpi-conversion">0%</div>
+      <div class="kpi-sub">Convertido / Total</div>
+      <div class="kpi-icon">📈</div>
+    </div>
+    <div class="kpi-card" style="--kpi-color:#3B82F6">
+      <div class="kpi-label">Pendientes hoy</div>
+      <div class="kpi-value" id="kpi-pendientes">0</div>
+      <div class="kpi-sub">sin contactar</div>
+      <div class="kpi-icon">⏰</div>
+    </div>
+    <div class="kpi-card" style="--kpi-color:#EF4444">
+      <div class="kpi-label">Sin respuesta</div>
+      <div class="kpi-value" id="kpi-perdidos">0</div>
+      <div class="kpi-sub">para reactivar</div>
+      <div class="kpi-icon">🔄</div>
+    </div>
+  </div>
+
+  <!-- PIPELINE VIEW -->
+  <div id="pipelineView" class="pipeline-section">
+    <div class="pipeline-header">
+      <h2>🏥 Pipeline de Prospectos</h2>
+      <div class="pipeline-legend" id="pipelineLegend"></div>
+    </div>
+    <div class="pipeline-wrap" id="kanbanBoard"></div>
+  </div>
+
+  <!-- TABLE VIEW -->
+  <div id="tableView" class="table-view">
+    <div class="data-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Paciente</th>
+            <th>Contacto</th>
+            <th>Especialidad</th>
+            <th>Sede</th>
+            <th>Cita</th>
+            <th>Etapa</th>
+            <th>Origen</th>
+            <th>Ingreso</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- ── WHATSAPP FLOAT ─────────────────────────────────────────── -->
+<button class="wa-float" onclick="openWAModal()" title="Contactar por WhatsApp">
+  <div class="wa-pulse"></div>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</button>
+
+<!-- ── TOAST CONTAINER ───────────────────────────────────────── -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- MODAL: NUEVO PROSPECTO / WHATSAPP FORM               -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="waModalOverlay">
+  <div class="modal modal-sm">
+    <div class="wa-modal-header">
+      <div class="wa-logo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </div>
+      <div class="wa-modal-header-text">
+        <h3>Contactar por WhatsApp</h3>
+        <p>Completa los datos y te conectamos</p>
+      </div>
+      <button class="btn-close" onclick="closeModal('waModalOverlay')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="wa-chat-bubble">
+        👋 Hola, nos gustaría conocerte mejor antes de conectarte con el equipo RoaDent. Por favor completa estos datos:
+      </div>
+      <form id="waForm" onsubmit="handleWAForm(event)">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="form-group">
+            <label class="form-label">Nombre completo <span class="req">*</span></label>
+            <input type="text" class="form-control" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Correo o teléfono <span class="req">*</span></label>
+            <input type="text" class="form-control" name="contacto" placeholder="email@ejemplo.com o +56 9..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Especialidad de interés <span class="req">*</span></label>
+            <select class="form-control" name="especialidad" required>
+              <option value="" disabled selected>Selecciona una especialidad</option>
+              <option>Invisalign / Ortodoncia</option>
+              <option>Implantes Dentales</option>
+              <option>Carillas de Porcelana</option>
+              <option>Blanqueamiento Zoom</option>
+              <option>Endodoncia</option>
+              <option>Odontopediatría</option>
+              <option>Consulta General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sede preferida <span class="req">*</span></label>
+            <select class="form-control" name="sede" required>
+              <option value="" disabled selected>Selecciona una sede</option>
+              <option>Sede Centro — Los Carrera 541</option>
+              <option>Sede Norte — Av. Copayapu 3800</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Día preferido <span class="req">*</span></label>
+            <input type="date" class="form-control" name="fecha" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Horario preferido <span class="req">*</span></label>
+            <select class="form-control" name="hora" required>
+              <option value="" disabled selected>Selecciona un horario</option>
+              <option>Mañana (09:00 - 13:00)</option>
+              <option>Mediodía (13:00 - 15:00)</option>
+              <option>Tarde (15:00 - 19:00)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">¿Algo más que debamos saber? <em style="font-weight:400;color:var(--text-light)">(opcional)</em></label>
+            <textarea class="form-control" name="mensaje" placeholder="Cuéntanos más sobre tu consulta…" style="min-height:64px"></textarea>
+          </div>
+          <button type="submit" class="btn-wa" style="width:100%;justify-content:center;margin-top:4px">
+            <svg style="width:18px;height:18px;fill:#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Enviar y abrir WhatsApp
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- MODAL: NUEVO PROSPECTO MANUAL                        -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="newLeadOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h3>➕ Nuevo Prospecto</h3>
+        <p>Agrega manualmente un nuevo paciente al pipeline</p>
+      </div>
+      <button class="btn-close" onclick="closeModal('newLeadOverlay')">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="newLeadForm" onsubmit="handleNewLead(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Nombre completo <span class="req">*</span></label>
+            <input type="text" class="form-control" name="nombre" placeholder="Nombre del paciente" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Correo o teléfono <span class="req">*</span></label>
+            <input type="text" class="form-control" name="contacto" placeholder="+56 9... o email" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Especialidad de interés <span class="req">*</span></label>
+            <select class="form-control" name="especialidad" required>
+              <option value="" disabled selected>Selecciona una especialidad</option>
+              <option>Invisalign / Ortodoncia</option>
+              <option>Implantes Dentales</option>
+              <option>Carillas de Porcelana</option>
+              <option>Blanqueamiento Zoom</option>
+              <option>Endodoncia</option>
+              <option>Odontopediatría</option>
+              <option>Consulta General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sede preferida <span class="req">*</span></label>
+            <select class="form-control" name="sede" required>
+              <option value="" disabled selected>Selecciona una sede</option>
+              <option>Sede Centro — Los Carrera 541</option>
+              <option>Sede Norte — Av. Copayapu 3800</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Día preferido</label>
+            <input type="date" class="form-control" name="fecha">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Horario preferido</label>
+            <select class="form-control" name="hora">
+              <option value="">Selecciona un horario</option>
+              <option>Mañana (09:00 - 13:00)</option>
+              <option>Mediodía (13:00 - 15:00)</option>
+              <option>Tarde (15:00 - 19:00)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Etapa inicial</label>
+            <select class="form-control" name="etapa">
+              <option value="nuevo">🔵 Nuevo Lead</option>
+              <option value="contactado">📞 Contactado</option>
+              <option value="agendado">📅 Cita Agendada</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Origen</label>
+            <select class="form-control" name="origen">
+              <option>Formulario Web</option>
+              <option>WhatsApp</option>
+              <option>Teléfono</option>
+              <option>Instagram</option>
+              <option>Referido</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Notas iniciales</label>
+            <textarea class="form-control" name="mensaje" placeholder="Observaciones del primer contacto…"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer" style="padding:16px 0 0;border-top:1px solid var(--border);margin-top:16px">
+          <button type="button" class="btn-secondary" onclick="closeModal('newLeadOverlay')">Cancelar</button>
+          <button type="submit" class="btn-primary">Agregar al pipeline</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- MODAL: DETALLE PROSPECTO                             -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="detailOverlay">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div>
+        <h3 id="detail-title">Detalle del prospecto</h3>
+        <p id="detail-sub"></p>
+      </div>
+      <button class="btn-close" onclick="closeModal('detailOverlay')">✕</button>
+    </div>
+    <div class="modal-body" id="detailBody"></div>
+    <div class="modal-footer">
+      <button class="btn-danger" id="detail-archive" onclick="archiveLead()">Marcar perdido</button>
+      <button class="btn-secondary" id="detail-reactivate" onclick="reactivateLead()" style="display:none">🔄 Reactivar</button>
+      <button class="btn-wa" id="detail-wa" onclick="openWAForLead()">
+        <svg style="width:16px;height:16px;fill:#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Abrir WhatsApp
+      </button>
+      <button class="btn-primary" id="detail-advance" onclick="advanceLead()">Avanzar etapa →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- MODAL: GOOGLE SHEETS                                 -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="sheetsOverlay">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div>
+        <h3>📗 Integración Google Sheets</h3>
+        <p>Conecta el CRM con tu hoja de cálculo en 3 pasos</p>
+      </div>
+      <button class="btn-close" onclick="closeModal('sheetsOverlay')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="sheets-step">
+        <div class="sheets-step-num">1</div>
+        <div class="sheets-step-content">
+          <strong>Crea tu Google Sheet</strong>
+          <p>Abre Google Sheets y crea un nuevo archivo llamado "RoaDent CRM". En la primera fila agrega estas columnas:</p>
+          <div class="code-block">Fecha | Nombre | Contacto | Especialidad | Sede | Fecha Cita | Hora | Mensaje | Origen | Etapa | Notas</div>
+        </div>
+      </div>
+      <div class="sheets-step">
+        <div class="sheets-step-num">2</div>
+        <div class="sheets-step-content">
+          <strong>Crea el Script de Google Apps</strong>
+          <p>Ve a Extensiones → Apps Script y pega este código:</p>
+          <div class="code-block">
+function doPost(e) {<br>
+&nbsp;&nbsp;var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();<br>
+&nbsp;&nbsp;var data = JSON.parse(e.postData.contents);<br>
+&nbsp;&nbsp;sheet.appendRow([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;new Date(), data.nombre, data.contacto,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data.especialidad, data.sede, data.fecha,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data.hora, data.mensaje, data.origen,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data.etapa, (data.notas||[]).join(' | ')<br>
+&nbsp;&nbsp;]);<br>
+&nbsp;&nbsp;return ContentService.createTextOutput(JSON.stringify({ok:true}))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;.setMimeType(ContentService.MimeType.JSON);<br>
+}
+          </div>
+          <p>Luego ve a Implementar → Nueva implementación → Aplicación web. Acceso: <strong>Cualquier persona</strong>. Copia la URL.</p>
+        </div>
+      </div>
+      <div class="sheets-step">
+        <div class="sheets-step-num">3</div>
+        <div class="sheets-step-content">
+          <strong>Pega la URL del Web App aquí</strong>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <input type="url" id="sheetsUrl" class="form-control" placeholder="https://script.google.com/macros/s/..." value="">
+            <button class="btn-primary" onclick="saveSheetsUrl()" style="flex-shrink:0">Guardar</button>
+          </div>
+          <p style="margin-top:6px">Una vez configurado, el botón "Sync Sheets" enviará todos los prospectos nuevos automáticamente.</p>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:12px;color:var(--text-mid)">
+          URL actual: <strong id="currentSheetsUrl" style="color:var(--brand)">No configurada</strong>
+        </div>
+        <button class="btn-primary" onclick="syncToSheets()">🔄 Sincronizar ahora</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<script>
+
+// ── DATA DEFINITIONS ────────────────────────────────────────
+const STAGES = [
+  { id: 'nuevo',      label: 'Nuevo Lead',      emoji: '🔵', color: '#F59E0B', next: 'contactado'  },
+  { id: 'contactado', label: 'Contactado',       emoji: '📞', color: '#3B82F6', next: 'agendado'    },
+  { id: 'agendado',   label: 'Cita Agendada',    emoji: '📅', color: '#8B5CF6', next: 'confirmado'  },
+  { id: 'confirmado', label: 'Cita Confirmada',  emoji: '✅', color: '#06B6D4', next: 'atendido'    },
+  { id: 'atendido',   label: 'Atendido',         emoji: '🦷', color: '#10B981', next: 'convertido'  },
+  { id: 'convertido', label: 'Convertido',       emoji: '💚', color: '#059669', next: null          },
+  { id: 'perdido',    label: 'Sin respuesta',    emoji: '❌', color: '#EF4444', next: 'contactado'  },
+];
+
+const STAGE_MAP = Object.fromEntries(STAGES.map(s => [s.id, s]));
+
+const AVATAR_COLORS = [
+  '#1AADE0','#8B5CF6','#F59E0B','#10B981','#EF4444','#3B82F6','#06B6D4','#059669'
+];
+
+// ── STATE ───────────────────────────────────────────────────
+let leads = [];
+let currentFilter = 'all';
+let currentStageFilter = null;
+let activeLeadId = null;
+
+const STORAGE_KEY = 'roadent_crm_leads';
+const SHEETS_KEY  = 'roadent_crm_sheets_url';
+
+// ── SAMPLE DATA ─────────────────────────────────────────────
+const SAMPLE = [
+  {
+    id: 'p001', nombre: 'María González Rojas', contacto: '+56 9 8765 4321',
+    especialidad: 'Invisalign / Ortodoncia', sede: 'Sede Centro — Los Carrera 541',
+    fecha: '2026-05-30', hora: 'Mañana (09:00 - 13:00)',
+    mensaje: 'Tiene consultas sobre el costo y duración del tratamiento Invisalign.',
+    etapa: 'agendado', origen: 'Formulario Web',
+    fechaIngreso: '2026-05-24T09:15:00',
+    notas: ['24/05 — Llamada realizada. Muy interesada. Confirma cita para el 30.'],
+    timeline: ['Ingresó al sistema · 24/05/2026', 'Contactado vía teléfono · 24/05/2026', 'Cita agendada 30/05 AM · 24/05/2026']
+  },
+  {
+    id: 'p002', nombre: 'Carlos Araya Fuentes', contacto: '+56 9 1234 5678',
+    especialidad: 'Implantes Dentales', sede: 'Sede Norte — Av. Copayapu 3800',
+    fecha: '2026-06-02', hora: 'Tarde (15:00 - 19:00)',
+    mensaje: 'Perdió 2 piezas dentales. Quiere saber si es candidato a implantes.',
+    etapa: 'nuevo', origen: 'WhatsApp',
+    fechaIngreso: '2026-05-25T08:00:00',
+    notas: [],
+    timeline: ['Ingresó al sistema · 25/05/2026']
+  },
+  {
+    id: 'p003', nombre: 'Valentina Torres Díaz', contacto: 'vtorres@gmail.com',
+    especialidad: 'Carillas de Porcelana', sede: 'Sede Centro — Los Carrera 541',
+    fecha: '2026-05-28', hora: 'Mediodía (13:00 - 15:00)',
+    mensaje: 'Quiere un diseño de sonrisa completo. Presupuesto: consultar.',
+    etapa: 'confirmado', origen: 'Instagram',
+    fechaIngreso: '2026-05-22T14:30:00',
+    notas: ['22/05 — Interesada en diseño de sonrisa. Solicita presupuesto.', '23/05 — Enviado presupuesto por email. Espera aprobación familiar.', '24/05 — Confirmó cita para el 28/05.'],
+    timeline: ['Ingresó al sistema · 22/05/2026', 'Contactado · 22/05/2026', 'Cita agendada 28/05 · 23/05/2026', 'Cita confirmada · 24/05/2026']
+  },
+  {
+    id: 'p004', nombre: 'Rodrigo Pizarro Muñoz', contacto: '+56 9 5555 1212',
+    especialidad: 'Blanqueamiento Zoom', sede: 'Sede Norte — Av. Copayapu 3800',
+    fecha: '2026-05-26', hora: 'Mañana (09:00 - 13:00)',
+    mensaje: 'Boda en julio. Quiere blanqueamiento antes de la fecha.',
+    etapa: 'contactado', origen: 'Formulario Web',
+    fechaIngreso: '2026-05-23T11:20:00',
+    notas: ['23/05 — Se contactó. Muy motivado. Tiene boda en julio.'],
+    timeline: ['Ingresó al sistema · 23/05/2026', 'Contactado · 23/05/2026']
+  },
+  {
+    id: 'p005', nombre: 'Ana Luisa Medina Vega', contacto: '+56 9 9876 0001',
+    especialidad: 'Endodoncia', sede: 'Sede Centro — Los Carrera 541',
+    fecha: '', hora: '',
+    mensaje: 'Dolor agudo en molar desde hace 3 días.',
+    etapa: 'nuevo', origen: 'Teléfono',
+    fechaIngreso: '2026-05-25T07:45:00',
+    notas: [],
+    timeline: ['Ingresó al sistema · 25/05/2026']
+  },
+  {
+    id: 'p006', nombre: 'Diego Herrera Campos', contacto: 'dherrera@hotmail.com',
+    especialidad: 'Consulta General', sede: 'Sede Norte — Av. Copayapu 3800',
+    fecha: '2026-05-20', hora: 'Tarde (15:00 - 19:00)',
+    mensaje: 'Control anual.',
+    etapa: 'convertido', origen: 'Referido',
+    fechaIngreso: '2026-05-15T10:00:00',
+    notas: ['Paciente muy satisfecho. Inicia tratamiento de ortodoncia en junio.'],
+    timeline: ['Ingresó · 15/05/2026', 'Contactado · 15/05/2026', 'Cita agendada · 16/05/2026', 'Cita confirmada · 18/05/2026', 'Atendido · 20/05/2026', 'Convertido — inicia tratamiento · 22/05/2026']
+  },
+  {
+    id: 'p007', nombre: 'Francisca Ramos Leiva', contacto: '+56 9 7777 3344',
+    especialidad: 'Invisalign / Ortodoncia', sede: 'Sede Centro — Los Carrera 541',
+    fecha: '', hora: '',
+    mensaje: 'No contestó 2 llamadas. Dejó mensaje en redes.',
+    etapa: 'perdido', origen: 'Instagram',
+    fechaIngreso: '2026-05-18T16:00:00',
+    notas: ['18/05 — 2 intentos de llamada sin respuesta.', '19/05 — Mensaje WhatsApp sin respuesta.'],
+    timeline: ['Ingresó · 18/05/2026', 'Intento de contacto x2 · 18/05/2026', 'Sin respuesta · 19/05/2026']
+  },
+  {
+    id: 'p008', nombre: 'Juan Pablo Soto Morales', contacto: '+56 9 2233 4455',
+    especialidad: 'Implantes Dentales', sede: 'Sede Centro — Los Carrera 541',
+    fecha: '2026-06-05', hora: 'Mañana (09:00 - 13:00)',
+    mensaje: 'Evaluación para implante unitario superior.',
+    etapa: 'agendado', origen: 'Formulario Web',
+    fechaIngreso: '2026-05-24T13:00:00',
+    notas: ['24/05 — Coordina cita. Tiene disponibilidad tardes y mañanas.'],
+    timeline: ['Ingresó · 24/05/2026', 'Contactado · 24/05/2026', 'Cita agendada 05/06 · 24/05/2026']
+  },
+  {
+    id: 'p009', nombre: 'Catalina Vidal Espinoza', contacto: 'catalina.vidal@gmail.com',
+    especialidad: 'Carillas de Porcelana', sede: 'Sede Norte — Av. Copayapu 3800',
+    fecha: '2026-05-25', hora: 'Tarde (15:00 - 19:00)',
+    mensaje: '',
+    etapa: 'atendido', origen: 'WhatsApp',
+    fechaIngreso: '2026-05-20T09:00:00',
+    notas: ['25/05 — Atendida. Muy conforme con la atención.'],
+    timeline: ['Ingresó · 20/05/2026', 'Contactado · 20/05/2026', 'Agendado · 21/05/2026', 'Confirmado · 24/05/2026', 'Atendida hoy · 25/05/2026']
+  },
+  {
+    id: 'p010', nombre: 'Marcelo Ortiz Bravo', contacto: '+56 9 6600 8899',
+    especialidad: 'Blanqueamiento Zoom', sede: 'Sede Centro — Los Carrera 541',
+    fecha: '2026-05-28', hora: 'Mañana (09:00 - 13:00)',
+    mensaje: 'Primera vez en la clínica.',
+    etapa: 'contactado', origen: 'Formulario Web',
+    fechaIngreso: '2026-05-25T11:00:00',
+    notas: ['25/05 — Contactado. Tiene dudas sobre si puede hacerse blanqueamiento con brackets.'],
+    timeline: ['Ingresó · 25/05/2026', 'Contactado · 25/05/2026']
+  }
+];
+
+// ── INIT ─────────────────────────────────────────────────────
+function init() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  leads = stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(SAMPLE));
+  if (!stored) save();
+
+  // Load sheets URL
+  const url = localStorage.getItem(SHEETS_KEY) || '';
+  document.getElementById('sheetsUrl').value = url;
+  document.getElementById('currentSheetsUrl').textContent = url || 'No configurada';
+
+  // Set min date
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type="date"]').forEach(i => i.min = today);
+
+  renderAll();
+}
+
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+}
+
+// ── HELPERS ──────────────────────────────────────────────────
+function uid() {
+  return 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+}
+
+function avatarColor(name) {
+  let h = 0;
+  for (let c of name) h = (h * 31 + c.charCodeAt(0)) % AVATAR_COLORS.length;
+  return AVATAR_COLORS[h];
+}
+
+function initials(name) {
+  return name.trim().split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+}
+
+function formatDate(iso) {
+  if (!iso) return '—';
+  const [y, m, d] = iso.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+function formatIngreso(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleDateString('es-CL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+}
+
+function originBadge(o) {
+  const cls = o === 'WhatsApp' ? 'wa' : o === 'Teléfono' ? 'tel' : 'web';
+  return `<span class="badge-origin ${cls}">${o}</span>`;
+}
+
+function stagePill(stageId) {
+  const s = STAGE_MAP[stageId] || STAGE_MAP['nuevo'];
+  return `<span class="stage-pill" style="background:${s.color}22;color:${s.color}">${s.emoji} ${s.label}</span>`;
+}
+
+// ── FILTER & SEARCH ──────────────────────────────────────────
+function getFiltered() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  return leads.filter(l => {
+    const matchQ = !q ||
+      l.nombre.toLowerCase().includes(q) ||
+      l.contacto.toLowerCase().includes(q) ||
+      l.especialidad.toLowerCase().includes(q) ||
+      (l.sede||'').toLowerCase().includes(q);
+
+    const matchSpec = currentFilter === 'all' || l.especialidad.toLowerCase().includes(currentFilter.toLowerCase());
+    const matchStage = !currentStageFilter || l.etapa === currentStageFilter;
+
+    return matchQ && matchSpec && matchStage;
+  });
+}
+
+function setFilter(val, el) {
+  currentFilter = val;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderAll();
+}
+
+function filterByStage(stage) {
+  currentStageFilter = currentStageFilter === stage ? null : stage;
+  renderAll();
+}
+
+// ── VIEW TOGGLE ──────────────────────────────────────────────
+let currentView = 'pipeline';
+function showView(v) {
+  currentView = v;
+  document.getElementById('pipelineView').style.display = v === 'pipeline' ? 'block' : 'none';
+  document.getElementById('tableView').style.display = v === 'table' ? 'block' : 'none';
+  document.getElementById('viewPipeline').classList.toggle('active', v === 'pipeline');
+  document.getElementById('viewTable').classList.toggle('active', v === 'table');
+  renderAll();
+}
+
+// ── RENDER ───────────────────────────────────────────────────
+function renderAll() {
+  const filtered = getFiltered();
+  updateKPIs();
+  updateSidebarBadges();
+  renderKanban(filtered);
+  renderTable(filtered);
+}
+
+function updateKPIs() {
+  const total     = leads.length;
+  const agendados = leads.filter(l => ['agendado','confirmado'].includes(l.etapa)).length;
+  const conv      = leads.filter(l => l.etapa === 'convertido').length;
+  const perdidos  = leads.filter(l => l.etapa === 'perdido').length;
+  const nuevos    = leads.filter(l => l.etapa === 'nuevo').length;
+  const pct       = total ? Math.round(conv / total * 100) : 0;
+
+  document.getElementById('kpi-total').textContent      = total;
+  document.getElementById('kpi-agendados').textContent  = agendados;
+  document.getElementById('kpi-conversion').textContent = pct + '%';
+  document.getElementById('kpi-pendientes').textContent = nuevos;
+  document.getElementById('kpi-perdidos').textContent   = perdidos;
+  document.getElementById('badge-total').textContent    = total;
+}
+
+function updateSidebarBadges() {
+  ['nuevo','agendado','convertido','perdido'].forEach(stage => {
+    const el = document.getElementById('sidebar-' + stage);
+    if (el) el.textContent = leads.filter(l => l.etapa === stage).length;
+  });
+}
+
+function renderKanban(filtered) {
+  const board = document.getElementById('kanbanBoard');
+  board.innerHTML = '';
+
+  const legend = document.getElementById('pipelineLegend');
+  legend.innerHTML = STAGES.map(s =>
+    `<div class="legend-item"><div class="legend-dot" style="background:${s.color}"></div>${s.label}: <strong>${leads.filter(l=>l.etapa===s.id).length}</strong></div>`
+  ).join('');
+
+  STAGES.forEach(stage => {
+    const cards = filtered.filter(l => l.etapa === stage.id);
+    const col = document.createElement('div');
+    col.className = 'kanban-col';
+    col.dataset.stage = stage.id;
+    col.addEventListener('dragover', e => { e.preventDefault(); col.classList.add('drag-over'); });
+    col.addEventListener('dragleave', () => col.classList.remove('drag-over'));
+    col.addEventListener('drop', e => { e.preventDefault(); col.classList.remove('drag-over'); handleDrop(e, stage.id); });
+
+    col.innerHTML = `
+      <div class="col-header">
+        <div class="col-dot" style="background:${stage.color}"></div>
+        <div class="col-name">${stage.emoji} ${stage.label}</div>
+        <div class="col-count">${cards.length}</div>
+      </div>
+      <div class="col-body" id="col-${stage.id}">
+        ${cards.length === 0 ? `<div class="col-empty"><div class="col-empty-icon">📭</div>Sin prospectos</div>` : ''}
+      </div>
+    `;
+    board.appendChild(col);
+
+    const body = col.querySelector('.col-body');
+    cards.forEach(lead => {
+      const card = buildCard(lead, stage);
+      body.appendChild(card);
+    });
+  });
+}
+
+function buildCard(lead, stage) {
+  const div = document.createElement('div');
+  div.className = 'lead-card';
+  div.draggable = true;
+  div.dataset.id = lead.id;
+  div.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('leadId', lead.id);
+    div.classList.add('dragging');
+  });
+  div.addEventListener('dragend', () => div.classList.remove('dragging'));
+
+  const nextStage = STAGE_MAP[stage.next];
+  const nextLabel = nextStage ? `→ ${nextStage.label}` : null;
+  const phone = extractPhone(lead.contacto);
+
+  div.innerHTML = `
+    <span class="card-origin-badge">${lead.origen.replace(' ','&nbsp;')}</span>
+    <div class="card-top">
+      <div class="card-avatar" style="background:${avatarColor(lead.nombre)}">${initials(lead.nombre)}</div>
+      <div class="card-info">
+        <div class="card-name">${lead.nombre}</div>
+        <div class="card-contact">${lead.contacto}</div>
+      </div>
+    </div>
+    <div class="card-specialty">🦷 ${lead.especialidad}</div>
+    <div class="card-meta">
+      <span class="card-meta-item">📍 ${(lead.sede||'').split('—')[0].trim()}</span>
+      ${lead.fecha ? `<span class="card-meta-item">📅 ${formatDate(lead.fecha)}</span>` : ''}
+      ${lead.hora ? `<span class="card-meta-item">🕐 ${lead.hora.split('(')[0].trim()}</span>` : ''}
+    </div>
+    <div class="card-actions">
+      <button class="card-btn" onclick="event.stopPropagation();openDetail('${lead.id}')" title="Ver detalle">👁</button>
+      ${phone ? `<button class="card-btn wa" onclick="event.stopPropagation();waContact('${phone}','${lead.nombre}')" title="WhatsApp">💬</button>` : ''}
+      <span class="card-note-count">📝 ${(lead.notas||[]).length}</span>
+      ${nextLabel && stage.id !== 'convertido' ? `<button class="card-btn-advance" onclick="event.stopPropagation();moveLeadTo('${lead.id}','${stage.next}')">${nextLabel}</button>` : ''}
+      ${stage.id === 'perdido' ? `<button class="card-btn-advance" onclick="event.stopPropagation();reactivateById('${lead.id}')">🔄 Reactivar</button>` : ''}
+    </div>
+  `;
+  div.querySelector('.card-top').addEventListener('click', () => openDetail(lead.id));
+  div.querySelector('.card-specialty').addEventListener('click', () => openDetail(lead.id));
+  return div;
+}
+
+function extractPhone(contacto) {
+  const match = contacto.match(/(\+?\d[\d\s\-]{7,})/);
+  return match ? match[1].replace(/\s/g,'') : null;
+}
+
+function waContact(phone, nombre) {
+  const msg = encodeURIComponent(`Hola ${nombre}, te contactamos desde Clínica RoaDent. ¿Podemos ayudarte con tu consulta?`);
+  window.open(`https://wa.me/${phone.replace('+','')}?text=${msg}`, '_blank');
+}
+
+function handleDrop(e, targetStage) {
+  const leadId = e.dataTransfer.getData('leadId');
+  if (!leadId) return;
+  moveLeadTo(leadId, targetStage);
+}
+
+function moveLeadTo(id, stage) {
+  const lead = leads.find(l => l.id === id);
+  if (!lead || lead.etapa === stage) return;
+  const prevStage = STAGE_MAP[lead.etapa];
+  lead.etapa = stage;
+  const newStage = STAGE_MAP[stage];
+  lead.timeline = lead.timeline || [];
+  lead.timeline.push(`Movido a "${newStage.label}" · ${new Date().toLocaleDateString('es-CL')}`);
+  save();
+  renderAll();
+  toast(`${lead.nombre} → ${newStage.emoji} ${newStage.label}`, 'success');
+  syncLeadToSheets(lead);
+}
+
+// ── TABLE VIEW ───────────────────────────────────────────────
+function renderTable(filtered) {
+  const tbody = document.getElementById('tableBody');
+  if (!tbody) return;
+  tbody.innerHTML = filtered.map(l => {
+    const s = STAGE_MAP[l.etapa] || STAGE_MAP['nuevo'];
+    const phone = extractPhone(l.contacto);
+    return `
+      <tr>
+        <td>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="card-avatar" style="width:30px;height:30px;font-size:11px;background:${avatarColor(l.nombre)}">${initials(l.nombre)}</div>
+            <div>
+              <div style="font-weight:600">${l.nombre}</div>
+              <div style="font-size:11px;color:var(--text-light)">${formatIngreso(l.fechaIngreso)}</div>
+            </div>
+          </div>
+        </td>
+        <td>${l.contacto}</td>
+        <td>${l.especialidad}</td>
+        <td style="font-size:11px">${(l.sede||'').split('—')[0].trim()}</td>
+        <td>${l.fecha ? formatDate(l.fecha) + '<br><small style="color:var(--text-light)">' + (l.hora||'').split('(')[0] + '</small>' : '—'}</td>
+        <td>${stagePill(l.etapa)}</td>
+        <td>${originBadge(l.origen)}</td>
+        <td style="font-size:11px;color:var(--text-light)">${formatIngreso(l.fechaIngreso)}</td>
+        <td>
+          <div style="display:flex;gap:4px">
+            <button class="card-btn" onclick="openDetail('${l.id}')" title="Ver detalle">👁</button>
+            ${phone ? `<button class="card-btn wa" onclick="waContact('${phone}','${l.nombre}')" title="WhatsApp">💬</button>` : ''}
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('') || `<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-light)">No hay prospectos que mostrar</td></tr>`;
+}
+
+// ── DETAIL MODAL ─────────────────────────────────────────────
+function openDetail(id) {
+  activeLeadId = id;
+  const lead = leads.find(l => l.id === id);
+  if (!lead) return;
+  const s = STAGE_MAP[lead.etapa];
+
+  document.getElementById('detail-title').textContent = lead.nombre;
+  document.getElementById('detail-sub').textContent = `${s.emoji} ${s.label} · Ingresó ${formatDate(lead.fechaIngreso?.split('T')[0]||'')}`;
+
+  const isPerdido = lead.etapa === 'perdido';
+  const isConvertido = lead.etapa === 'convertido';
+  document.getElementById('detail-archive').style.display = isPerdido || isConvertido ? 'none' : '';
+  document.getElementById('detail-reactivate').style.display = isPerdido ? '' : 'none';
+  document.getElementById('detail-advance').style.display = (s.next && !isPerdido && !isConvertido) ? '' : 'none';
+  if (s.next) document.getElementById('detail-advance').textContent = `Avanzar: ${STAGE_MAP[s.next]?.label} →`;
+
+  const phone = extractPhone(lead.contacto);
+  document.getElementById('detail-wa').style.display = phone ? '' : 'none';
+
+  const stageOptions = STAGES.map(st =>
+    `<option value="${st.id}" ${st.id === lead.etapa ? 'selected' : ''}>${st.emoji} ${st.label}</option>`
+  ).join('');
+
+  const notesHTML = (lead.notas||[]).length
+    ? lead.notas.map(n => `<div class="note-item">${n}</div>`).join('')
+    : '<div style="color:var(--text-light);font-size:12px">Sin notas aún.</div>';
+
+  const timelineHTML = (lead.timeline||[]).map(t =>
+    `<div class="timeline-item"><div class="timeline-dot">📌</div><div class="timeline-content"><div class="timeline-title">${t}</div></div></div>`
+  ).join('');
+
+  document.getElementById('detailBody').innerHTML = `
+    <div class="detail-header">
+      <div class="detail-avatar" style="background:${avatarColor(lead.nombre)}">${initials(lead.nombre)}</div>
+      <div>
+        <div class="detail-name">${lead.nombre}</div>
+        <div class="detail-contact">${lead.contacto}</div>
+      </div>
+      <select class="detail-stage-select" onchange="moveLeadTo('${lead.id}', this.value)">
+        ${stageOptions}
+      </select>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-field"><div class="detail-field-label">Especialidad</div><div class="detail-field-value">🦷 ${lead.especialidad}</div></div>
+      <div class="detail-field"><div class="detail-field-label">Sede preferida</div><div class="detail-field-value">📍 ${lead.sede||'—'}</div></div>
+      <div class="detail-field"><div class="detail-field-label">Fecha solicitada</div><div class="detail-field-value">📅 ${formatDate(lead.fecha)}</div></div>
+      <div class="detail-field"><div class="detail-field-label">Horario</div><div class="detail-field-value">🕐 ${lead.hora||'—'}</div></div>
+      <div class="detail-field"><div class="detail-field-label">Origen</div><div class="detail-field-value">${originBadge(lead.origen)} ${lead.origen}</div></div>
+      <div class="detail-field"><div class="detail-field-label">Etapa</div><div class="detail-field-value">${stagePill(lead.etapa)}</div></div>
+    </div>
+    ${lead.mensaje ? `<div style="background:var(--bg);border-radius:8px;padding:12px 14px;font-size:12px;border-left:3px solid var(--brand);margin-bottom:16px"><strong>Mensaje:</strong> ${lead.mensaje}</div>` : ''}
+    <div class="section-divider"></div>
+    <div class="detail-notes">
+      <h4>📝 Notas de seguimiento</h4>
+      <div class="notes-list" id="notesList">${notesHTML}</div>
+      <div class="note-add">
+        <input type="text" id="noteInput" placeholder="Agregar nota de seguimiento…" onkeydown="if(event.key==='Enter')saveNote()">
+        <button onclick="saveNote()">Agregar</button>
+      </div>
+    </div>
+    <div class="section-divider"></div>
+    <div style="margin-top:16px">
+      <h4 style="font-size:13px;font-weight:700;margin-bottom:12px">📋 Historial de actividad</h4>
+      <div class="timeline">${timelineHTML}</div>
+    </div>
+  `;
+
+  openModal('detailOverlay');
+}
+
+function saveNote() {
+  const input = document.getElementById('noteInput');
+  const text = input.value.trim();
+  if (!text) return;
+  const lead = leads.find(l => l.id === activeLeadId);
+  if (!lead) return;
+  const dated = `${new Date().toLocaleDateString('es-CL')} — ${text}`;
+  lead.notas = lead.notas || [];
+  lead.notas.push(dated);
+  lead.timeline = lead.timeline || [];
+  lead.timeline.push(`Nota: "${text.slice(0,40)}…" · ${new Date().toLocaleDateString('es-CL')}`);
+  save();
+  input.value = '';
+  // Refresh notes list
+  const notesHTML = lead.notas.map(n => `<div class="note-item">${n}</div>`).join('');
+  document.getElementById('notesList').innerHTML = notesHTML;
+  toast('Nota guardada', 'success');
+}
+
+function archiveLead() {
+  const lead = leads.find(l => l.id === activeLeadId);
+  if (!lead) return;
+  lead.etapa = 'perdido';
+  lead.timeline = lead.timeline || [];
+  lead.timeline.push(`Marcado sin respuesta · ${new Date().toLocaleDateString('es-CL')}`);
+  save();
+  closeModal('detailOverlay');
+  renderAll();
+  toast(`${lead.nombre} marcado como sin respuesta`, 'info');
+}
+
+function reactivateLead() {
+  reactivateById(activeLeadId);
+  closeModal('detailOverlay');
+}
+
+function reactivateById(id) {
+  const lead = leads.find(l => l.id === id);
+  if (!lead) return;
+  lead.etapa = 'contactado';
+  lead.timeline = lead.timeline || [];
+  lead.timeline.push(`Reactivado → Contactado · ${new Date().toLocaleDateString('es-CL')}`);
+  save();
+  renderAll();
+  toast(`${lead.nombre} reactivado 🔄`, 'success');
+}
+
+function advanceLead() {
+  const lead = leads.find(l => l.id === activeLeadId);
+  if (!lead) return;
+  const s = STAGE_MAP[lead.etapa];
+  if (!s.next) return;
+  moveLeadTo(lead.id, s.next);
+  closeModal('detailOverlay');
+}
+
+function openWAForLead() {
+  const lead = leads.find(l => l.id === activeLeadId);
+  if (!lead) return;
+  const phone = extractPhone(lead.contacto);
+  if (!phone) return;
+  closeModal('detailOverlay');
+  waContact(phone, lead.nombre);
+}
+
+// ── NEW LEAD FORM ─────────────────────────────────────────────
+function openNewLead() {
+  document.getElementById('newLeadForm').reset();
+  openModal('newLeadOverlay');
+}
+
+function handleNewLead(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const lead = {
+    id: uid(),
+    nombre:      fd.get('nombre'),
+    contacto:    fd.get('contacto'),
+    especialidad:fd.get('especialidad'),
+    sede:        fd.get('sede'),
+    fecha:       fd.get('fecha'),
+    hora:        fd.get('hora'),
+    mensaje:     fd.get('mensaje'),
+    etapa:       fd.get('etapa') || 'nuevo',
+    origen:      fd.get('origen') || 'Formulario Web',
+    fechaIngreso:new Date().toISOString(),
+    notas:       fd.get('mensaje') ? [`${new Date().toLocaleDateString('es-CL')} — ${fd.get('mensaje')}`] : [],
+    timeline:    [`Ingresó al sistema · ${new Date().toLocaleDateString('es-CL')}`]
+  };
+  leads.unshift(lead);
+  save();
+  closeModal('newLeadOverlay');
+  renderAll();
+  toast(`${lead.nombre} agregado al pipeline ✅`, 'success');
+  syncLeadToSheets(lead);
+}
+
+// ── WA FORM ──────────────────────────────────────────────────
+function openWAModal() {
+  document.getElementById('waForm').reset();
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelector('#waForm input[name="fecha"]').min = today;
+  openModal('waModalOverlay');
+}
+
+function handleWAForm(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const lead = {
+    id: uid(),
+    nombre:      fd.get('nombre'),
+    contacto:    fd.get('contacto'),
+    especialidad:fd.get('especialidad'),
+    sede:        fd.get('sede'),
+    fecha:       fd.get('fecha'),
+    hora:        fd.get('hora'),
+    mensaje:     fd.get('mensaje'),
+    etapa:       'nuevo',
+    origen:      'WhatsApp',
+    fechaIngreso:new Date().toISOString(),
+    notas:       fd.get('mensaje') ? [`${new Date().toLocaleDateString('es-CL')} — ${fd.get('mensaje')}`] : [],
+    timeline:    [`Ingresó vía WhatsApp · ${new Date().toLocaleDateString('es-CL')}`]
+  };
+  leads.unshift(lead);
+  save();
+  closeModal('waModalOverlay');
+  renderAll();
+  toast(`${lead.nombre} agregado al CRM ✅`, 'success');
+  syncLeadToSheets(lead);
+
+  // Build WA message
+  const msg = encodeURIComponent(
+    `Hola RoaDent, quiero agendar una evaluación:\n` +
+    `Nombre: ${lead.nombre}\n` +
+    `Contacto: ${lead.contacto}\n` +
+    `Especialidad: ${lead.especialidad}\n` +
+    `Sede: ${lead.sede}\n` +
+    `Fecha preferida: ${formatDate(lead.fecha)}\n` +
+    `Horario: ${lead.hora}\n` +
+    (lead.mensaje ? `Mensaje: ${lead.mensaje}` : '')
+  );
+  setTimeout(() => window.open(`https://wa.me/56978114661?text=${msg}`, '_blank'), 500);
+}
+
+// ── GOOGLE SHEETS SYNC ───────────────────────────────────────
+function openSheetsModal() {
+  const url = localStorage.getItem(SHEETS_KEY) || '';
+  document.getElementById('sheetsUrl').value = url;
+  document.getElementById('currentSheetsUrl').textContent = url || 'No configurada';
+  openModal('sheetsOverlay');
+}
+
+function saveSheetsUrl() {
+  const url = document.getElementById('sheetsUrl').value.trim();
+  localStorage.setItem(SHEETS_KEY, url);
+  document.getElementById('currentSheetsUrl').textContent = url || 'No configurada';
+  toast('URL de Google Sheets guardada ✅', 'success');
+}
+
+function syncLeadToSheets(lead) {
+  const url = localStorage.getItem(SHEETS_KEY);
+  if (!url) return;
+  fetch(url, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(lead)
+  }).catch(() => {});
+}
+
+function syncToSheets() {
+  const url = localStorage.getItem(SHEETS_KEY);
+  if (!url) {
+    openSheetsModal();
+    toast('Configura primero la URL de Google Sheets', 'info');
+    return;
+  }
+  const btn = document.getElementById('syncBtn');
+  btn.classList.add('syncing');
+  btn.textContent = '⏳ Sincronizando…';
+
+  const promises = leads.map(lead =>
+    fetch(url, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lead)
+    }).catch(() => {})
+  );
+
+  Promise.allSettled(promises).then(() => {
+    btn.classList.remove('syncing');
+    btn.textContent = '📗 Sync Sheets';
+    toast(`${leads.length} prospectos sincronizados con Google Sheets ✅`, 'success');
+  });
+}
+
+// ── CSV EXPORT ───────────────────────────────────────────────
+function exportCSV() {
+  const headers = ['ID','Nombre','Contacto','Especialidad','Sede','Fecha Cita','Horario','Mensaje','Etapa','Origen','Fecha Ingreso','Notas'];
+  const rows = leads.map(l => [
+    l.id, l.nombre, l.contacto, l.especialidad, l.sede||'', l.fecha||'', l.hora||'',
+    (l.mensaje||'').replace(/,/g,';'),
+    STAGE_MAP[l.etapa]?.label || l.etapa,
+    l.origen, l.fechaIngreso?.split('T')[0]||'',
+    (l.notas||[]).join(' | ').replace(/,/g,';')
+  ]);
+  const csv = [headers, ...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n');
+  const blob = new Blob(['﻿'+csv], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `RoaDent_CRM_${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+  toast('CSV exportado correctamente ✅', 'success');
+}
+
+function clearAllData() {
+  if (!confirm('¿Seguro que quieres limpiar todos los prospectos? Esta acción no se puede deshacer.')) return;
+  leads = [];
+  save();
+  renderAll();
+  toast('Datos limpiados', 'info');
+}
+
+// ── MODAL UTILS ──────────────────────────────────────────────
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeModal(overlay.id);
+  });
+});
+
+// ESC key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.open').forEach(o => closeModal(o.id));
+  }
+});
+
+// ── TOAST ─────────────────────────────────────────────────────
+function toast(msg, type = 'info') {
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span>${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span> ${msg}`;
+  container.appendChild(el);
+  setTimeout(() => el.remove(), 4200);
+}
+
+// ── START ─────────────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
