@@ -338,6 +338,34 @@
     }
     .closing-chip.highlight { background: linear-gradient(135deg, var(--blue), var(--cyan)); color: white; border-color: transparent; }
 
+    /* ── PARALLEL TRACKS ──────────────────────────────── */
+    .parallel-banner {
+      display: flex; align-items: center; gap: 14px;
+      background: linear-gradient(135deg, #0A1A2E 0%, #1B4F8A 100%);
+      border-radius: 18px; padding: 16px 22px; margin-bottom: 20px; color: white;
+    }
+    .parallel-banner .pb-icon { font-size: 24px; flex-shrink: 0; }
+    .parallel-banner strong { display: block; font-size: 14px; font-weight: 800; }
+    .parallel-banner span { font-size: 13px; color: rgba(255,255,255,.72); }
+    .tracks-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+    .track-label {
+      padding: 9px 14px; border-radius: 10px; font-size: 12px; font-weight: 800;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .track-ldv { background: #e8f5ff; color: #0b5a9c; }
+    .track-client { background: #e8fdf3; color: #065f46; }
+    .phase-tracks { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .phase-track-pill {
+      font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 6px;
+    }
+    .pt-ldv { background: #dbeafe; color: #1e40af; }
+    .pt-client { background: #d1fae5; color: #065f46; }
+    .timeline-week {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #f0f7ff; border: 1px solid #bde0f7; border-radius: 999px;
+      padding: 5px 12px; font-size: 11px; font-weight: 800; color: #0b5a9c;
+    }
+
     /* ── URL TABLE ────────────────────────────────────── */
     .url-section-title {
       font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
@@ -624,26 +652,45 @@
   <div class="container">
     <div class="section-head">
       <div class="kicker">Roadmap de implementación</div>
-      <h2>6 etapas. <span class="grad">12 a 14 semanas.</span></h2>
-      <p>Un plan ordenado, con hitos claros y responsables definidos desde el primer día.</p>
+      <h2>5 etapas. <span class="grad">4 a 6 semanas.</span></h2>
+      <p>Trabajamos en dos carriles simultáneos: LDV Agency avanza en diseño y desarrollo mientras el equipo RoaDent gestiona materiales y producción audiovisual. Sin esperar, sin bloqueos.</p>
     </div>
+
+    <!-- Parallel tracks banner -->
+    <div class="parallel-banner">
+      <div class="pb-icon">⚡</div>
+      <div>
+        <strong>Modelo de trabajo en paralelo — no en cadena</strong>
+        <span>Diseño, desarrollo y analytics avanzan simultáneamente con la recopilación de materiales del cliente. Integramos contenido a medida que llega, sin detener el proyecto.</span>
+      </div>
+    </div>
+    <div class="tracks-wrap">
+      <div class="track-label track-ldv">🔵 LDV Agency — Diseño, desarrollo, analytics y configuración</div>
+      <div class="track-label track-client">🟢 Equipo RoaDent — Materiales, contenido y producción audiovisual</div>
+    </div>
+
     <div class="timeline">
 
       <div class="phase">
         <div class="phase-head">
           <div>
             <b>Etapa 1 · Semana 1</b>
-            <h3>Reunión Keynote de apertura</h3>
+            <h3>Kickoff, auditoría técnica y setup</h3>
           </div>
           <span class="badge badge-done">✅ Completada</span>
         </div>
         <div class="phase-body">
-          Reunión realizada con el Dr. Óscar Roa. Visión estratégica validada, alcance aprobado y roadmap confirmado. Se definió el concepto central: <em>"Odontología premium, digital y humana."</em>
-          <ul class="phase-list">
-            <li>Validación de la visión estratégica y concepto de marca.</li>
-            <li>Aprobación del alcance ampliado (sitio + CRM + analytics + capacitación).</li>
-            <li>Definición de estructura del equipo y páginas incluidas.</li>
-            <li>Confirmación de la inversión total de USD $1,500.</li>
+          Reunión realizada con el Dr. Óscar Roa. Visión aprobada, alcance definido y proyecto iniciado. En paralelo, LDV ejecuta la auditoría completa del sitio actual.
+          <div class="phase-tracks">
+            <span class="phase-track-pill pt-ldv">🔵 LDV: Auditoría de URLs y contenido actual</span>
+            <span class="phase-track-pill pt-ldv">🔵 LDV: Setup técnico GA4, GTM y Meta Pixel</span>
+            <span class="phase-track-pill pt-client">🟢 RoaDent: Brief de materiales entregado</span>
+          </div>
+          <ul class="phase-list" style="margin-top:14px">
+            <li>Validación de visión estratégica y concepto: <em>"Odontología premium, digital y humana."</em></li>
+            <li>Inventario completo de URLs activas y contenido a preservar.</li>
+            <li>Instalación base de GTM, GA4 y Meta Pixel en el sitio actual.</li>
+            <li>Entrega de brief al equipo RoaDent con lista de materiales requeridos.</li>
           </ul>
         </div>
       </div>
@@ -651,20 +698,24 @@
       <div class="phase">
         <div class="phase-head">
           <div>
-            <b>Etapa 2 · Semanas 2–3</b>
-            <h3>Recopilación de materiales del cliente</h3>
+            <b>Etapa 2 · Semanas 1–2</b>
+            <h3>Diseño UX/UI en paralelo con entrega de materiales</h3>
           </div>
-          <span class="badge badge-blue">En proceso</span>
+          <span class="badge badge-teal">Diseño · En paralelo</span>
         </div>
         <div class="phase-body">
-          El equipo de RoaDent provee los materiales necesarios para construir el nuevo sitio. Esta etapa es el cuello de botella crítico que determina el avance del proyecto.
-          <ul class="phase-list">
-            <li>Fotos profesionales y perfiles de todos los especialistas.</li>
-            <li>Datos actualizados de ambas sedes (dirección, horarios, teléfonos).</li>
-            <li>Videos e imágenes de instalaciones y equipamiento.</li>
-            <li>Casos clínicos disponibles (fotos antes/después).</li>
-            <li>Acceso a WordPress, hosting y Google Business Profile.</li>
-            <li>Logos en alta resolución y manual de marca (si existe).</li>
+          Mientras el equipo de RoaDent recopila y envía materiales progresivamente, LDV diseña el sistema visual completo. El diseño avanza con contenido de referencia y se actualiza a medida que llega el real.
+          <div class="phase-tracks">
+            <span class="phase-track-pill pt-ldv">🔵 LDV: Diseño del home y páginas principales</span>
+            <span class="phase-track-pill pt-ldv">🔵 LDV: Sistema visual premium aplicado</span>
+            <span class="phase-track-pill pt-client">🟢 RoaDent: Fotos de especialistas y sedes</span>
+            <span class="phase-track-pill pt-client">🟢 RoaDent: Datos de sedes y accesos</span>
+          </div>
+          <ul class="phase-list" style="margin-top:14px">
+            <li>Propuesta visual de home, especialidades, equipo clínico y sedes.</li>
+            <li>Aprobación del Dr. Óscar sobre el sistema visual antes de programar.</li>
+            <li>Integración progresiva de fotos, logos y datos reales conforme llegan.</li>
+            <li>Definición de estructura de paneles autoadministrables.</li>
           </ul>
         </div>
       </div>
@@ -672,57 +723,26 @@
       <div class="phase">
         <div class="phase-head">
           <div>
-            <b>Etapa 3 · Semanas 3–6</b>
-            <h3>Producción audiovisual</h3>
+            <b>Etapa 3 · Semanas 2–4</b>
+            <h3>Desarrollo completo en paralelo con producción audiovisual</h3>
           </div>
-          <span class="badge badge-purple">Cuello de botella crítico</span>
+          <span class="badge badge-blue">Desarrollo · En paralelo</span>
         </div>
         <div class="phase-body">
-          La producción de video define la calidad diferenciadora del nuevo sitio. Sin contenido audiovisual, no es posible el home cinematográfico ni los casos clínicos en video.
-          <ul class="phase-list">
-            <li>Video institucional de ambas sedes (cinematic).</li>
-            <li>Videos de experiencia de paciente y reels para redes sociales.</li>
-            <li>Casos clínicos documentados antes/después en formato video.</li>
-            <li>Material de tecnología en uso: Invisalign, CBCT, escáneres.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="phase">
-        <div class="phase-head">
-          <div>
-            <b>Etapa 4 · Semanas 5–8</b>
-            <h3>Diseño UX/UI del nuevo sitio</h3>
+          LDV desarrolla e implementa todas las páginas del sitio, el CRM y los paneles mientras el equipo de RoaDent trabaja en la producción audiovisual. El sitio se construye con placeholders y se integra el video cuando está disponible.
+          <div class="phase-tracks">
+            <span class="phase-track-pill pt-ldv">🔵 LDV: Desarrollo de todas las páginas</span>
+            <span class="phase-track-pill pt-ldv">🔵 LDV: CRM Dashboard y paneles</span>
+            <span class="phase-track-pill pt-ldv">🔵 LDV: Analytics y eventos de conversión</span>
+            <span class="phase-track-pill pt-client">🟢 RoaDent: Producción audiovisual (videos)</span>
+            <span class="phase-track-pill pt-client">🟢 RoaDent: Casos clínicos antes/después</span>
           </div>
-          <span class="badge badge-teal">Diseño</span>
-        </div>
-        <div class="phase-body">
-          Diseño del nuevo sistema visual aplicado a todas las páginas del sitio. Propuestas de wireframes, aprobación del cliente e iteración hasta aprobación final.
-          <ul class="phase-list">
-            <li>Wireframes de home, especialidades, equipo, sedes y casos clínicos.</li>
-            <li>Aplicación del nuevo sistema visual premium.</li>
-            <li>Diseño responsivo para móvil, tablet y escritorio.</li>
-            <li>Aprobación del Dr. Óscar antes de la implementación.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="phase">
-        <div class="phase-head">
-          <div>
-            <b>Etapa 5 · Semanas 8–12</b>
-            <h3>Desarrollo e implementación completa</h3>
-          </div>
-          <span class="badge badge-blue">Desarrollo</span>
-        </div>
-        <div class="phase-body">
-          Programación e implementación del nuevo sitio web completo, conversión de todas las páginas y configuración del ecosistema técnico.
-          <ul class="phase-list">
+          <ul class="phase-list" style="margin-top:14px">
             <li>Conversión de todas las páginas al nuevo formato premium.</li>
-            <li>Implementación del CRM Dashboard para el área comercial.</li>
-            <li>Configuración de paneles autoadministrables.</li>
-            <li>Optimización técnica, velocidad y SEO on-page.</li>
-            <li>Validación responsive en todos los dispositivos.</li>
+            <li>CRM Dashboard operativo con pipeline de prospectos.</li>
+            <li>Paneles autoadministrables configurados y funcionando.</li>
+            <li>Configuración completa de GA4, GTM y todos los eventos de conversión.</li>
+            <li>Los videos se integran tan pronto el equipo los entrega, sin bloquear el resto.</li>
           </ul>
         </div>
       </div>
@@ -730,24 +750,70 @@
       <div class="phase">
         <div class="phase-head">
           <div>
-            <b>Etapa 6 · Semanas 12–14</b>
-            <h3>Analytics, tracking, capacitación y lanzamiento</h3>
+            <b>Etapa 4 · Semana 4–5</b>
+            <h3>QA, integración final y aprobación</h3>
           </div>
-          <span class="badge badge-green">Lanzamiento</span>
+          <span class="badge badge-gold">Revisión y aprobación</span>
         </div>
         <div class="phase-body">
-          Configuración final del ecosistema de medición, lanzamiento del sitio y inicio de las 3 semanas de acompañamiento al equipo comercial.
-          <ul class="phase-list">
-            <li>Instalación y configuración de GA4, GTM y Meta Pixel.</li>
-            <li>Configuración de eventos de conversión para campañas publicitarias.</li>
-            <li>Lanzamiento oficial del nuevo sitio web.</li>
-            <li>Inicio de 3 semanas de capacitación del área comercial en el CRM.</li>
-            <li>Entrega de documentación y accesos al equipo de RoaDent.</li>
+          Todo el contenido está integrado. Se realiza la revisión completa del sitio, validación técnica y la aprobación final del Dr. Óscar antes del lanzamiento.
+          <div class="phase-tracks">
+            <span class="phase-track-pill pt-ldv">🔵 LDV: Testing responsive y velocidad</span>
+            <span class="phase-track-pill pt-ldv">🔵 LDV: Validación de eventos y conversiones</span>
+            <span class="phase-track-pill pt-client">🟢 RoaDent: Revisión y aprobación final</span>
+          </div>
+          <ul class="phase-list" style="margin-top:14px">
+            <li>Revisión completa en móvil, tablet y escritorio.</li>
+            <li>Verificación de todos los eventos de conversión en GA4, GTM y Meta.</li>
+            <li>Validación de URLs, redirecciones 301 y SEO técnico.</li>
+            <li>Aprobación final del Dr. Óscar y del equipo de RoaDent.</li>
+            <li>Correcciones menores antes del lanzamiento.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head">
+          <div>
+            <b>Etapa 5 · Semana 5–6</b>
+            <h3>Lanzamiento e inicio de capacitación</h3>
+          </div>
+          <span class="badge badge-green">Lanzamiento 🚀</span>
+        </div>
+        <div class="phase-body">
+          Publicación oficial del nuevo sitio web, entrega de accesos y activación del CRM. Inicio inmediato de las 3 semanas de acompañamiento al área comercial.
+          <div class="phase-tracks">
+            <span class="phase-track-pill pt-ldv">🔵 LDV: Go live del sitio y verificación</span>
+            <span class="phase-track-pill pt-ldv">🔵 LDV: Entrega de accesos y documentación</span>
+            <span class="phase-track-pill pt-client">🟢 RoaDent: Inicio de capacitación semana 1</span>
+          </div>
+          <ul class="phase-list" style="margin-top:14px">
+            <li>Publicación oficial del nuevo sitio web de Clínica RoaDent.</li>
+            <li>Verificación post-lanzamiento: velocidad, indexación, formularios y CRM.</li>
+            <li>Entrega de credenciales, paneles y manual de operaciones al equipo.</li>
+            <li>Inicio de Semana 1 de capacitación del área comercial en el CRM.</li>
+            <li>Las semanas 2 y 3 de capacitación se ejecutan según calendario del equipo.</li>
           </ul>
         </div>
       </div>
 
     </div>
+
+    <div style="margin-top:20px;background:white;border:1px solid var(--line);border-radius:16px;padding:18px 22px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center">
+      <div>
+        <div style="font-size:28px;font-weight:900;font-family:Sora,Inter,sans-serif;color:var(--blue)">4–6</div>
+        <div style="font-size:12px;color:var(--muted);font-weight:600">semanas hasta el lanzamiento</div>
+      </div>
+      <div>
+        <div style="font-size:28px;font-weight:900;font-family:Sora,Inter,sans-serif;color:var(--green)">3</div>
+        <div style="font-size:12px;color:var(--muted);font-weight:600">semanas de capacitación post-lanzamiento</div>
+      </div>
+      <div>
+        <div style="font-size:28px;font-weight:900;font-family:Sora,Inter,sans-serif;color:var(--teal)">2</div>
+        <div style="font-size:12px;color:var(--muted);font-weight:600">carriles en paralelo desde el día 1</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
